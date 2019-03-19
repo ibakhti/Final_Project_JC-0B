@@ -25,4 +25,5 @@
 .dropdown-menu {
   font-size: 12px !important;
   background: #f3f3f3;
+  box-shadow: 3px 2px rgba(153, 152, 152, 0.315);
 }
