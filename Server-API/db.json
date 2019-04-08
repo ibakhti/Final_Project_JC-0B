@@ -1,12 +1,104 @@
 {
-    "users":[
-        {
-            "id": 1,
-            "firstName": "ilham",
-            "lastName": "bakhti",
-            "email": "il@m.com",
-            "gender": "men",
-            "password": "il"
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "firstName": "ilham",
+      "lastName": "bakhti",
+      "email": "il@m.com",
+      "gender": "men",
+      "password": "il"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "category": "men",
+      "srcPict": "https://images.pexels.com/photos/1580267/pexels-photo-1580267.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+    },
+    {
+      "id": 2,
+      "category": "men",
+      "srcPict": "https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "id": 3,
+      "category": "men",
+      "srcPict": "https://images.pexels.com/photos/267294/pexels-photo-267294.jpeg?cs=srgb&dl=blur-classic-close-up-267294.jpg&fm=jpg"
+    },
+    {
+      "id": 4,
+      "category": "men",
+      "srcPict": "https://images.pexels.com/photos/1598508/pexels-photo-1598508.jpeg?cs=srgb&dl=brand-design-fashion-1598508.jpg&fm=jpg"
+    },
+    {
+      "id": 5,
+      "category": "men",
+      "srcPict": "https://images.unsplash.com/photo-1542219550-37153d387c27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+    },
+    {
+      "id": 6,
+      "category": "men",
+      "srcPict": "https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+    },
+    {
+      "id": 7,
+      "category": "men",
+      "srcPict": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&dl=revolt-1151785-unsplash.jpg"
+    },
+    {
+      "id": 8,
+      "category": "men",
+      "srcPict": "https://cdn.pixabay.com/photo/2018/01/25/00/18/sneakers-3105120_960_720.jpg"
+    },
+    {
+      "id": 9,
+      "category": "men",
+      "srcPict": "https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&dl=alexander-rotker-513958-unsplash.jpg"
+    },
+    {
+      "id": 10,
+      "category": "women",
+      "srcPict": "https://images.unsplash.com/photo-1465453869711-7e174808ace9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1510&q=80"
+    },
+    {
+      "id": 11,
+      "category": "women",
+      "srcPict": "   https://images.pexels.com/photos/1032110/pexels-photo-1032110.jpeg?cs=srgb&dl=brand-design-fashion-1032110.jpg&fm=jpg"
+    },
+    {
+      "id": 12,
+      "category": "women",
+      "srcPict": "https://cdn.pixabay.com/photo/2017/05/14/21/36/shoe-2313143_960_720.jpg"
+    },
+    {
+      "id": 13,
+      "category": "women",
+      "srcPict": "https://images.pexels.com/photos/414008/pexels-photo-414008.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    {
+      "id": 14,
+      "category": "women",
+      "srcPict": "https://cdn.pixabay.com/photo/2016/09/05/16/28/converse-1646992_960_720.jpg"
+    },
+    {
+      "id": 15,
+      "category": "women",
+      "srcPict": "https://cdn.pixabay.com/photo/2017/05/13/18/48/shoe-2310400_960_720.jpg"
+    },
+    {
+      "id": 16,
+      "category": "women",
+      "srcPict": "https://cdn.pixabay.com/photo/2016/06/03/17/35/shoe-1433925_960_720.jpg"
+    },
+    {
+      "id": 17,
+      "category": "women",
+      "srcPict": "https://images.pexels.com/photos/1599005/pexels-photo-1599005.jpeg?cs=srgb&dl=brand-branding-fashion-1599005.jpg&fm=jpg"
+    },
+    {
+      "id": 18,
+      "category": "women",
+      "srcPict": "https://cdn.pixabay.com/photo/2015/06/02/23/15/winter-boots-795706_960_720.jpg"
+    }
+  ]
 }

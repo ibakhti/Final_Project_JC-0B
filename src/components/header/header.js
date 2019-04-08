@@ -17,14 +17,15 @@ class Header extends Component {
     this.email.value = "";
     this.pass.value = "";
   };
+
   render() {
     if (!this.props.nameFromReducer) {
       return (
-        <div className="container-fluid">
-          <nav className="row navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container-fluid mb-5">
+          <nav className="row navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <div className="col-md-1">
               <Link className="navbar-brand" to="/">
-                Brand
+                <strong>B & C</strong>
               </Link>
               <button
                 className="navbar-toggler"
@@ -42,19 +43,14 @@ class Header extends Component {
               <div className="col-md-3">
                 <ul className="navbar-nav ">
                   <li className="nav-item">
-                    <a className="nav-link" href="#id">
-                      Shop
-                    </a>
+                    <Link className="nav-link" to="/menproducts">
+                      Men
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#id">
-                      Link 1
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#id">
-                      Link 2
-                    </a>
+                    <Link className="nav-link" to="/womenproducts">
+                      Women
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -63,7 +59,7 @@ class Header extends Component {
                 <ul className="navbar-nav">
                   <li className="nav-item dropdown">
                     <a
-                      className="nav-link dropdown-toggle"
+                      className="nav-link dropdown-toggle whiteText"
                       href="#id"
                       id="navbarDropdownMenuLink"
                       data-toggle="dropdown"
@@ -127,7 +123,7 @@ class Header extends Component {
       );
     } else {
       return (
-        <div className="container-fluid">
+        <div className="container-fluid mb-5">
           <nav className="row navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="col-md-1">
               <Link className="navbar-brand" to="/">
@@ -150,17 +146,12 @@ class Header extends Component {
                 <ul className="navbar-nav ">
                   <li className="nav-item">
                     <a className="nav-link" href="#id">
-                      Shop
+                      Men
                     </a>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="#id">
-                      Link 1
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#id">
-                      Link 2
+                      Women
                     </a>
                   </li>
                 </ul>
@@ -193,7 +184,7 @@ class Header extends Component {
 
                       <div className="dropdown-divider" />
                       <div className="d-flex flex-row">
-                        <a className="dropdown-item" href="id" id="signout">
+                        <a className="dropdown-item" href="/" id="signout">
                           Sign Out
                         </a>
                         <button

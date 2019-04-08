@@ -5,7 +5,7 @@ class Register extends Component {
   render() {
     return (
       <div className="container mt-5">
-        <div className="row">
+        <div className="row pt-5">
           <div className="col">
             <p>
               <strong>Create Account</strong>
