@@ -20,4 +20,6 @@ export const actionLogin = (email, password) => {
   };
 };
 
-// window.action = actionLogin;
+export const actionLogout = () => ({
+  type: "LOGOUT_SUCCESS"
+});

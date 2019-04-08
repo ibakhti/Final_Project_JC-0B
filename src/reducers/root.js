@@ -13,6 +13,12 @@ const userAcountReducer = (state = initialState, action) => {
         id: action.userData.id,
         firstName: action.userData.firstName
       };
+    case "LOGOUT_SUCCESS":
+      return {
+        ...state,
+        id: "",
+        firstName: ""
+      };
 
     default:
       return state;

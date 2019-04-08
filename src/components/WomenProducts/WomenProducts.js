@@ -43,7 +43,7 @@ class WomenProducts extends Component {
       <div className="container-fluid">
         <div className="row pt-5 mx-3">
           <p>
-            <strong>Women Category</strong>
+            <strong>Women Collection</strong>
           </p>
         </div>
         <div className="row pb-5">{this.productsDisplayMap()}</div>

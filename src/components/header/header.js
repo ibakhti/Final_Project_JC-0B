@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { actionLogin } from "../../actions";
+import { actionLogin, actionLogout } from "../../actions";
 import "./header.css";
 
 class Header extends Component {
@@ -127,7 +127,7 @@ class Header extends Component {
           <nav className="row navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="col-md-1">
               <Link className="navbar-brand" to="/">
-                Brand
+                <strong>B & C</strong>
               </Link>
               <button
                 className="navbar-toggler"
@@ -145,12 +145,12 @@ class Header extends Component {
               <div className="col-md-3">
                 <ul className="navbar-nav ">
                   <li className="nav-item">
-                    <a className="nav-link" href="#id">
+                    <a className="nav-link" href="/menproducts">
                       Men
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#id">
+                    <a className="nav-link" href="/womenproducts">
                       Women
                     </a>
                   </li>
@@ -161,7 +161,7 @@ class Header extends Component {
                 <ul className="navbar-nav">
                   <li className="nav-item dropdown">
                     <a
-                      className="nav-link dropdown-toggle"
+                      className="nav-link dropdown-toggle whiteText"
                       href="#id"
                       id="navbarDropdownMenuLink"
                       data-toggle="dropdown"
@@ -184,14 +184,16 @@ class Header extends Component {
 
                       <div className="dropdown-divider" />
                       <div className="d-flex flex-row">
-                        <a className="dropdown-item" href="/" id="signout">
-                          Sign Out
-                        </a>
                         <button
+                          onClick={() => {
+                            this.props.actionLogout();
+                          }}
                           className="dropdown-item"
-                          href="id"
-                          id="myaccountbtn"
+                          id="signout"
                         >
+                          Sign Out
+                        </button>
+                        <button className="dropdown-item" id="myaccountbtn">
                           My Account
                         </button>
                       </div>
@@ -215,5 +217,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { actionLogin }
+  { actionLogin, actionLogout }
 )(Header);
