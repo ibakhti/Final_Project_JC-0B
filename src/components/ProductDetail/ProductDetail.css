@@ -1,0 +1,34 @@
+.images {
+  width: 100%;
+  height: auto;
+}
+
+.moveout {
+  transform: translateX(120px);
+}
+.moveout70 {
+  transform: translateX(70px);
+}
+
+.btncustome {
+  width: 100%;
+  padding: 1.071em;
+  background-color: black;
+}
+
+select {
+  height: 45px !important;
+}
+
+h2 {
+  width: 65% !important;
+}
+
+.ulcustom {
+  list-style-type: none;
+  width: 65%;
+}
+
+.ulcustom li {
+  margin-top: 15px;
+}

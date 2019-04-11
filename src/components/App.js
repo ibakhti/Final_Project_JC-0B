@@ -6,6 +6,7 @@ import Register from "./Register/Register";
 import Home from "./Home/Home";
 import MenProducts from "./MenProducts/MenProducts";
 import WomenProducts from "./WomenProducts/WomenProducts";
+import ProductDetail from "./ProductDetail/ProductDetail";
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/menproducts" component={MenProducts} />
           <Route path="/womenproducts" component={WomenProducts} />
+          <Route path="/productdetail" component={ProductDetail} />
         </div>
       </BrowserRouter>
     );
