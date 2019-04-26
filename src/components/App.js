@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import cookies from "universal-cookie";
+import { connect } from "react-redux";
 
 import Header from "./header/header";
 import Register from "./Register/Register";
@@ -8,7 +10,16 @@ import MenProducts from "./MenProducts/MenProducts";
 import WomenProducts from "./WomenProducts/WomenProducts";
 import ProductDetail from "./ProductDetail/ProductDetail";
 
+import { actionKeepLogin } from "./../actions";
+
+const cookie = new cookies();
+
 class App extends Component {
+  componentDidMount() {
+    const userId = cookie.get("userCookie");
+
+    if (userId) this.props.actionKeepLogin(userId);
+  }
   render() {
     return (
       <BrowserRouter>
@@ -25,4 +36,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  null,
+  { actionKeepLogin }
+)(App);

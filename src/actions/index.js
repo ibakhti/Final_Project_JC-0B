@@ -1,25 +1,83 @@
 import axios from "axios";
+import cookies from "universal-cookie";
+
+const cookie = new cookies();
 
 export const actionLogin = (email, password) => {
   return dispatch => {
     axios
-      .get("http://localhost:8080/users", {
-        params: {
-          email,
-          password
-        }
-      })
+      .get(
+        `http://localhost:8080/users/login?email=${email}&password=${password}`
+      )
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatch({
           type: "LOGIN_SUCCESS",
           userData: res.data[0]
         });
+        cookie.set("userCookie", res.data[0].userId, { path: "/" });
+        const path = window.location.pathname;
+        if (path === "/register") window.location.pathname = "/";
       })
       .catch(err => console.log(err));
   };
 };
 
-export const actionLogout = () => ({
-  type: "LOGOUT_SUCCESS"
-});
+export const actionLogout = () => {
+  cookie.remove("userCookie");
+  return {
+    type: "LOGOUT_SUCCESS"
+  };
+};
+
+export const actionKeepLogin = id => {
+  return dispatch => {
+    axios.get(`http://localhost:8080/users?id=${id}`).then(res => {
+      if (res.data.length > 0) {
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          userData: res.data[0]
+        });
+      }
+    });
+  };
+};
+
+export const actionRegister = (
+  firstName,
+  lastName,
+  email,
+  gender,
+  password
+) => {
+  return dispatch => {
+    axios
+      .post("http://localhost:8080/users", {
+        firstName,
+        lastName,
+        email,
+        gender,
+        password
+      })
+      .then(res => {
+        // console.log(res.data);
+        axios
+          .get(
+            `http://localhost:8080/users/login?email=${email}&password=${password}`
+          )
+          .then(res => {
+            // console.log(res.data);
+            dispatch({
+              type: "LOGIN_SUCCESS",
+              userData: res.data[0]
+            });
+            cookie.set("userCookie", res.data[0].userId, { path: "/" });
+            window.location.pathname = "/";
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
