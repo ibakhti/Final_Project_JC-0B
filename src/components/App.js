@@ -9,6 +9,8 @@ import Home from "./Home/Home";
 import MenProducts from "./MenProducts/MenProducts";
 import WomenProducts from "./WomenProducts/WomenProducts";
 import ProductDetail from "./ProductDetail/ProductDetail";
+import MyAccount from "./MyAccount/MyAccount";
+import MyPassword from "./MyAccount/MyPassword";
 
 import { actionKeepLogin } from "./../actions";
 
@@ -30,6 +32,8 @@ class App extends Component {
           <Route path="/menproducts" component={MenProducts} />
           <Route path="/womenproducts" component={WomenProducts} />
           <Route path="/productdetail" component={ProductDetail} />
+          <Route path="/myaccount" component={MyAccount} />
+          <Route path="/mypassword" component={MyPassword} />
         </div>
       </BrowserRouter>
     );

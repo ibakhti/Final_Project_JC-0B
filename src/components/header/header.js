@@ -193,9 +193,13 @@ class Header extends Component {
                         >
                           Sign Out
                         </button>
-                        <button className="dropdown-item" id="myaccountbtn">
+                        <Link
+                          className="dropdown-item"
+                          id="myaccountbtn"
+                          to="/myaccount"
+                        >
                           My Account
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </li>

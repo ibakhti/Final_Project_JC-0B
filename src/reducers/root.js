@@ -2,7 +2,10 @@ import { combineReducers } from "redux";
 
 const initialState = {
   id: "",
-  firstName: ""
+  firstName: "",
+  lastName: "",
+  email: "",
+  gender: ""
 };
 
 const userAcountReducer = (state = initialState, action) => {
@@ -10,14 +13,20 @@ const userAcountReducer = (state = initialState, action) => {
     case "LOGIN_SUCCESS":
       return {
         ...state,
-        id: action.userData.id,
-        firstName: action.userData.firstName
+        id: action.userData.userId,
+        firstName: action.userData.firstName,
+        lastName: action.userData.lastName,
+        email: action.userData.email,
+        gender: action.userData.gender
       };
     case "LOGOUT_SUCCESS":
       return {
         ...state,
         id: "",
-        firstName: ""
+        firstName: "",
+        lastName: "",
+        email: "",
+        gender: ""
       };
 
     default:

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./../config/axios";
 import cookies from "universal-cookie";
 
 const cookie = new cookies();
@@ -6,9 +6,7 @@ const cookie = new cookies();
 export const actionLogin = (email, password) => {
   return dispatch => {
     axios
-      .get(
-        `http://localhost:8080/users/login?email=${email}&password=${password}`
-      )
+      .get(`/users/login?email=${email}&password=${password}`)
       .then(res => {
         // console.log(res.data);
         dispatch({
@@ -32,7 +30,7 @@ export const actionLogout = () => {
 
 export const actionKeepLogin = id => {
   return dispatch => {
-    axios.get(`http://localhost:8080/users?id=${id}`).then(res => {
+    axios.get(`/users?id=${id}`).then(res => {
       if (res.data.length > 0) {
         dispatch({
           type: "LOGIN_SUCCESS",
@@ -52,7 +50,7 @@ export const actionRegister = (
 ) => {
   return dispatch => {
     axios
-      .post("http://localhost:8080/users", {
+      .post("/users", {
         firstName,
         lastName,
         email,
@@ -62,9 +60,7 @@ export const actionRegister = (
       .then(res => {
         // console.log(res.data);
         axios
-          .get(
-            `http://localhost:8080/users/login?email=${email}&password=${password}`
-          )
+          .get(`/users/login?email=${email}&password=${password}`)
           .then(res => {
             // console.log(res.data);
             dispatch({
@@ -72,7 +68,7 @@ export const actionRegister = (
               userData: res.data[0]
             });
             cookie.set("userCookie", res.data[0].userId, { path: "/" });
-            window.location.pathname = "/";
+            window.location.pathname = "/myaccount";
           })
           .catch(err => console.log(err));
       })
