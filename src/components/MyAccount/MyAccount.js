@@ -125,7 +125,7 @@ class MyAccount extends Component {
             <strong>Please Add Your Address </strong>
           </p>
         </div>
-        <MyAddress />
+        <MyAddress userId={this.props.userId} />
       </div>
     );
   }

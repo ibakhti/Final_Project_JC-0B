@@ -1,7 +1,75 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
+import axios from "./../../config/axios";
 
 class MyPassword extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flag: false,
+      success: false
+    };
+  }
+
+  submitNewPassword = () => {
+    const password = this.refs.password.value;
+    const repeatPassword = this.refs.repeatPassword.value;
+
+    if (password !== repeatPassword) {
+      this.setState({ flag: true });
+    }
+
+    if (password !== "") {
+      axios
+        .put(`/users/pass/${this.props.userId}`, {
+          password
+        })
+        .then(res => {
+          if (res.data.changedRows) {
+            this.setState({ success: true });
+          } else {
+            console.log(res.data);
+          }
+        });
+    }
+  };
+
+  errorMessageDisplay = () => {
+    if (this.state.flag) {
+      setTimeout(() => {
+        this.setState({ flag: false });
+      }, 3000);
+
+      return (
+        <div className="col">
+          <div className="alert alert-danger text-center">
+            Password Don't Match
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
+
+  succsessMessageDisplay = () => {
+    if (this.state.success) {
+      setTimeout(() => {
+        window.location.pathname = "/myaccount";
+      }, 2000);
+
+      return (
+        <div className="col">
+          <div className="alert alert-success text-center">Password Saved</div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
+
   render() {
     return (
       <div>
@@ -18,7 +86,7 @@ class MyPassword extends Component {
               <form className="form-group">
                 <label htmlFor="#firstname">Password</label>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
                   id="password"
                   ref="password"
@@ -31,7 +99,7 @@ class MyPassword extends Component {
               <form className="form-group">
                 <label htmlFor="#firstname">Repeat Password</label>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
                   id="repeatPassword"
                   ref="repeatPassword"
@@ -44,7 +112,15 @@ class MyPassword extends Component {
               <Link to="/myaccount" className="text-dark">
                 <strong>Back to My Account</strong>
               </Link>
-              <button className="btn btn-dark">Submit</button>
+              <button className="btn btn-dark" onClick={this.submitNewPassword}>
+                Submit
+              </button>
+            </div>
+          </div>
+          <div className="row mt-5">
+            <div className="col-md-6 offset-3">
+              {this.errorMessageDisplay()}
+              {this.succsessMessageDisplay()}
             </div>
           </div>
         </div>
@@ -53,4 +129,9 @@ class MyPassword extends Component {
   }
 }
 
-export default MyPassword;
+const mapStateToProps = state => {
+  return {
+    userId: state.account.id
+  };
+};
+export default connect(mapStateToProps)(MyPassword);
