@@ -7,6 +7,45 @@ import axios from "./../../config/axios";
 import { actionKeepLogin } from "./../../actions";
 
 class MyAccount extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: {},
+      flagAccount: false,
+      flagAddress: false
+    };
+  }
+
+  successMeessageDisplay = () => {
+    if (this.state.flagAccount) {
+      setTimeout(() => {
+        this.setState({ flagAccount: false });
+      }, 3000);
+
+      return (
+        <div className="col">
+          <div className="alert alert-success text-center">
+            Changed Account Success
+          </div>
+        </div>
+      );
+    } else if (this.state.flagAddress) {
+      setTimeout(() => {
+        this.setState({ flagAddress: false });
+      }, 3000);
+
+      return (
+        <div className="col">
+          <div className="alert alert-success text-center">
+            Changed Address Success
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
+
   submitUpdateData = () => {
     const firstName = this.refs.firstName.value,
       lastName = this.refs.lastName.value,
@@ -21,16 +60,28 @@ class MyAccount extends Component {
         gender
       })
       .then(res => {
-        console.log(res);
         if (res.data.changedRows) {
           this.props.actionKeepLogin(this.props.userId);
+          this.setState({ flagAccount: true });
         }
       });
   };
 
+  setFlagAddresstoTrue = () => {
+    this.setState({ flagAddress: true });
+  };
+
+  componentDidMount() {
+    axios.get(`/users/address?userId=${this.props.userId}`).then(res => {
+      if (res.status === 200) {
+        this.setState({ data: res.data[0] });
+      }
+    });
+  }
+
   render() {
     return (
-      <div className="container my-5">
+      <div className="container my-3">
         <div className="row pt-5">
           <div className="col-md">
             <p>
@@ -120,12 +171,24 @@ class MyAccount extends Component {
           </div>
         </div>
 
+        <div className="row mt-3">
+          <div className="col">{this.successMeessageDisplay()}</div>
+        </div>
+
         <div className="row mt-5 pt-5 pl-3">
           <p>
-            <strong>Please Add Your Address </strong>
+            <strong>Changed Your Address </strong>
           </p>
         </div>
-        <MyAddress userId={this.props.userId} />
+        <MyAddress
+          userId={this.props.userId}
+          user={this.state.data}
+          fnSuccess={this.setFlagAddresstoTrue}
+        />
+
+        <div className="row mt-3">
+          <div className="col">{this.successMeessageDisplay()}</div>
+        </div>
       </div>
     );
   }

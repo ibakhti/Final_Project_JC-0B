@@ -11,6 +11,7 @@ import WomenProducts from "./WomenProducts/WomenProducts";
 import ProductDetail from "./ProductDetail/ProductDetail";
 import MyAccount from "./MyAccount/MyAccount";
 import MyPassword from "./MyAccount/MyPassword";
+import MyRegAddress from "./MyAccount/MyRegAddress";
 
 import { actionKeepLogin } from "./../actions";
 
@@ -34,6 +35,7 @@ class App extends Component {
           <Route path="/productdetail" component={ProductDetail} />
           <Route path="/myaccount" component={MyAccount} />
           <Route path="/mypassword" component={MyPassword} />
+          <Route path="/myregaddress" component={MyRegAddress} />
         </div>
       </BrowserRouter>
     );

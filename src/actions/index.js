@@ -68,7 +68,7 @@ export const actionRegister = (
               userData: res.data[0]
             });
             cookie.set("userCookie", res.data[0].userId, { path: "/" });
-            window.location.pathname = "/myaccount";
+            window.location.pathname = "/myregaddress";
           })
           .catch(err => console.log(err));
       })

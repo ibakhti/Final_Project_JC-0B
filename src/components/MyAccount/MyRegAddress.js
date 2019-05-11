@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import axios from "./../../config/axios";
 
-class MyAddress extends Component {
+class MyRegAddress extends Component {
   submitAddress = () => {
     const address = this.refs.address.value,
       city = this.refs.city.value,
@@ -14,7 +15,8 @@ class MyAddress extends Component {
     console.log({ userId, address, city, state, zip, phoneNumber });
 
     axios
-      .put(`/users/address/update/${this.props.userId}`, {
+      .post("/users/address", {
+        userId,
         address,
         city,
         state,
@@ -22,25 +24,24 @@ class MyAddress extends Component {
         phoneNumber
       })
       .then(res => {
-        if (res.data.changedRows) {
-          this.props.fnSuccess();
-        }
+        console.log(res);
+        // window.location.pathname = "/myaccount";
       });
   };
 
   render() {
     return (
-      <div>
+      <div className="container">
+        <div className="row mt-5 pt-5 pl-3">
+          <p>
+            <strong>Please Add Your Address </strong>
+          </p>
+        </div>
         <div className="row">
           <div className="col-md">
             <form className="form-group">
               <label htmlFor="#firstname">Address</label>
-              <input
-                type="text"
-                className="form-control"
-                ref="address"
-                defaultValue={this.props.user.address}
-              />
+              <input type="text" className="form-control" ref="address" />
             </form>
           </div>
         </div>
@@ -48,24 +49,14 @@ class MyAddress extends Component {
           <div className="col-md">
             <form className="form-group">
               <label htmlFor="#firstname">city</label>
-              <input
-                type="text"
-                className="form-control"
-                ref="city"
-                defaultValue={this.props.user.city}
-              />
+              <input type="text" className="form-control" ref="city" />
             </form>
           </div>
 
           <div className="col-md">
             <form className="form-group">
               <label htmlFor="#firstname">state</label>
-              <input
-                type="text"
-                className="form-control"
-                ref="state"
-                defaultValue={this.props.user.state}
-              />
+              <input type="text" className="form-control" ref="state" />
             </form>
           </div>
         </div>
@@ -74,24 +65,14 @@ class MyAddress extends Component {
           <div className="col-md">
             <form className="form-group">
               <label htmlFor="#firstname">zip</label>
-              <input
-                type="text"
-                className="form-control"
-                ref="zip"
-                defaultValue={this.props.user.zip}
-              />
+              <input type="text" className="form-control" ref="zip" />
             </form>
           </div>
 
           <div className="col-md">
             <form className="form-group">
               <label htmlFor="#firstname">phone number</label>
-              <input
-                type="text"
-                className="form-control"
-                ref="phoneNumber"
-                defaultValue={this.props.user.phoneNumber}
-              />
+              <input type="text" className="form-control" ref="phoneNumber" />
             </form>
           </div>
         </div>
@@ -108,4 +89,9 @@ class MyAddress extends Component {
   }
 }
 
-export default MyAddress;
+const mapStateToProps = state => {
+  return {
+    userId: state.account.id
+  };
+};
+export default connect(mapStateToProps)(MyRegAddress);
