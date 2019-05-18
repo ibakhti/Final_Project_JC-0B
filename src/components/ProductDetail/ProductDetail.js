@@ -1,7 +1,48 @@
 import React, { Component } from "react";
 import "./ProductDetail.css";
+import axios from "./../../config/axios";
 
 class ProductDetail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataDisplay: [],
+      displayName: "",
+      displayPrice: "",
+      url1: ``,
+      url2: ``
+    };
+  }
+
+  sizeStocktmap = () => {
+    return this.state.dataDisplay.map((data, i) => {
+      return (
+        <option key={i}>{`size ${data.unitSize}  ||   ${
+          data.unitStock
+        } left`}</option>
+      );
+    });
+  };
+
+  componentDidMount() {
+    axios
+      .get(`/product/detail?sku=${this.props.match.params.sku}`)
+      .then(res => {
+        this.setState({
+          dataDisplay: res.data[1],
+          displayName: res.data[1][0].productName,
+          displayPrice: res.data[1][0].unitPrice,
+          url1: `http://localhost:8080/picture/${res.data[0][0].img}`,
+          url2: `http://localhost:8080/picture/${res.data[0][1].img}`
+        });
+        // console.log(res.data[0]);
+      });
+  }
+
+  componentDidUpdate() {
+    console.log(this.state.dataDisplay);
+  }
+
   render() {
     return (
       <div>
@@ -9,12 +50,12 @@ class ProductDetail extends Component {
           <div className="row pt-5">
             <div className="col-md">
               <img
-                src="https://images.unsplash.com/photo-1514590734052-344a18719611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                src={this.state.url1}
                 alt="shoes"
                 className="img-thumbnail my-5 images"
               />
               <img
-                src="https://images.unsplash.com/photo-1512990414788-d97cb4a25db3?ixlib=rb-1.2.1&auto=format&fit=crop&w=703&q=80"
+                src={this.state.url2}
                 alt="shoes"
                 className="img-thumbnail my-5 images moveout"
               />
@@ -28,18 +69,14 @@ class ProductDetail extends Component {
             <div className="col-md">
               <div className="row justify-content-center pt-5">
                 <div className="col-md-7">
-                  <h2>Lorem ipsum dolor sit amet.</h2>
+                  <h2>{this.state.displayName}</h2>
                   <p className="pb-5 pt-3">
-                    <strong>Rp.xxxx</strong>
+                    <strong>{this.state.displayPrice}</strong>
                   </p>
                   <form>
                     <div className="form-group">
                       <select className="form-control select-style">
-                        <option>size</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        {this.sizeStocktmap()}
                       </select>
                     </div>
                   </form>

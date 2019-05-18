@@ -42,6 +42,7 @@ export const actionKeepLogin = id => {
 };
 
 export const actionRegister = (
+  userName,
   firstName,
   lastName,
   email,
@@ -51,6 +52,7 @@ export const actionRegister = (
   return dispatch => {
     axios
       .post("/users", {
+        userName,
         firstName,
         lastName,
         email,
@@ -58,22 +60,36 @@ export const actionRegister = (
         password
       })
       .then(res => {
-        // console.log(res.data);
-        axios
-          .get(`/users/login?email=${email}&password=${password}`)
-          .then(res => {
-            // console.log(res.data);
-            dispatch({
-              type: "LOGIN_SUCCESS",
-              userData: res.data[0]
-            });
-            cookie.set("userCookie", res.data[0].userId, { path: "/" });
-            window.location.pathname = "/myregaddress";
-          })
-          .catch(err => console.log(err));
+        if (typeof res.data === typeof "") {
+          dispatch({
+            type: "REGISTER_ERROR",
+            messege: res.data
+          });
+        } else {
+          axios
+            .get(`/users/login?email=${email}&password=${password}`)
+            .then(res => {
+              // console.log(res.data);
+              dispatch({
+                type: "LOGIN_SUCCESS",
+                userData: res.data[0]
+              });
+              cookie.set("userCookie", res.data[0].userId, { path: "/" });
+              window.location.pathname = "/myregaddress";
+            })
+            .catch(err => console.log(err));
+        }
       })
       .catch(err => {
-        console.log(err);
+        dispatch({
+          type: "REGISTER_ERROR",
+          messege: "All Column Must Be Filled"
+        });
       });
   };
 };
+
+export const actionRegisterError = () => ({
+  type: "REGISTER_ERROR",
+  messege: ""
+});

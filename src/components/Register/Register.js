@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { actionRegister } from "./../../actions";
+import { actionRegister, actionRegisterError } from "./../../actions";
 
 class Register extends Component {
   constructor(props) {
@@ -30,8 +30,26 @@ class Register extends Component {
     }
   };
 
+  errorRegisterDiplay = () => {
+    if (this.props.errorRegister) {
+      setTimeout(() => {
+        this.props.actionRegisterError();
+      }, 5000);
+      return (
+        <div className="col">
+          <div className="alert alert-danger text-center">
+            {this.props.errorRegister}
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
+
   onCreateAccountClick = () => {
-    const firstName = this.refs.firstName.value,
+    const userName = this.refs.userName.value,
+      firstName = this.refs.firstName.value,
       lastName = this.refs.lastName.value,
       email = this.refs.email.value,
       gender = this.refs.gender.checked ? "men" : "women",
@@ -39,8 +57,15 @@ class Register extends Component {
       repeatPassword = this.refs.repeatPassword.value;
 
     if (password !== repeatPassword) return this.setState({ flag: true });
-    this.props.actionRegister(firstName, lastName, email, gender, password);
-    // console.log({ firstName, lastName, email, gender, password });
+    this.props.actionRegister(
+      userName,
+      firstName,
+      lastName,
+      email,
+      gender,
+      password
+    );
+    // console.log({ userName, firstName, lastName, email, gender, password });
   };
 
   render() {
@@ -51,6 +76,20 @@ class Register extends Component {
             <p>
               <strong>Create Account</strong>
             </p>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-md">
+            <form className="form-group">
+              <label htmlFor="#firstname">User Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="userName"
+                ref="userName"
+              />
+            </form>
           </div>
         </div>
 
@@ -160,12 +199,19 @@ class Register extends Component {
           </div>
         </div>
         <div className="row mt-3">{this.errorMessageDisplay()}</div>
+        <div className="row mt-3">{this.errorRegisterDiplay()}</div>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    errorRegister: state.account.error
+  };
+};
+
 export default connect(
-  null,
-  { actionRegister }
+  mapStateToProps,
+  { actionRegister, actionRegisterError }
 )(Register);

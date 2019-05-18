@@ -24,8 +24,7 @@ class MyRegAddress extends Component {
         phoneNumber
       })
       .then(res => {
-        console.log(res);
-        // window.location.pathname = "/myaccount";
+        window.location.pathname = "/";
       });
   };
 

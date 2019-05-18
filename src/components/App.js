@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import cookies from "universal-cookie";
 import { connect } from "react-redux";
 
-import Header from "./header/header";
+import HeaderMain from "./header/HeaderMain";
 import Register from "./Register/Register";
 import Home from "./Home/Home";
 import MenProducts from "./MenProducts/MenProducts";
@@ -27,12 +27,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Header />
+          <HeaderMain />
           <Route path="/" exact component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/menproducts" component={MenProducts} />
           <Route path="/womenproducts" component={WomenProducts} />
-          <Route path="/productdetail" component={ProductDetail} />
+          <Route path="/productdetail/:sku" component={ProductDetail} />
           <Route path="/myaccount" component={MyAccount} />
           <Route path="/mypassword" component={MyPassword} />
           <Route path="/myregaddress" component={MyRegAddress} />

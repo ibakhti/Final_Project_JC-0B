@@ -5,7 +5,8 @@ const initialState = {
   firstName: "",
   lastName: "",
   email: "",
-  gender: ""
+  gender: "",
+  error: ""
 };
 
 const userAcountReducer = (state = initialState, action) => {
@@ -29,6 +30,11 @@ const userAcountReducer = (state = initialState, action) => {
         gender: ""
       };
 
+    case "REGISTER_ERROR":
+      return {
+        ...state,
+        error: action.messege
+      };
     default:
       return state;
   }

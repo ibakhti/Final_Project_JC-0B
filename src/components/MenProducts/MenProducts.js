@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
+import axios from "./../../config/axios";
+
+import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/MenProducts/MenProductcss.css";
 
 class MensProdcts extends Component {
   constructor(props) {
@@ -10,31 +13,28 @@ class MensProdcts extends Component {
   }
 
   productsDisplayMap = () => {
+    // console.log(this.state.products);
     return this.state.products.map(product => {
       return (
-        <div className="col-md-4" key={product.id}>
-          <img
-            src={product.srcPict}
-            alt="shoes men"
-            className="img-thumbnail"
-          />
-          <p className="mb-0">lorem ipsum</p>
-          <p>Rp.xxxxx</p>
+        <div className="col-md-4 px-1" key={product.sku}>
+          <Link to={"/productdetail/" + product.sku}>
+            <img
+              src={`http://localhost:8080/picture/${product.img}`}
+              alt="shoes men"
+              className="imgClass"
+            />
+          </Link>
+          <p className="mb-0">{product.productName}</p>
+          <p>{product.unitPrice}</p>
         </div>
       );
     });
   };
 
   componentDidMount() {
-    axios
-      .get("http://localhost:8080/products", {
-        params: {
-          category: "men"
-        }
-      })
-      .then(res => {
-        this.setState({ products: res.data });
-      });
+    axios.get("/product/picture?category=men").then(res => {
+      this.setState({ products: res.data });
+    });
   }
 
   render() {
