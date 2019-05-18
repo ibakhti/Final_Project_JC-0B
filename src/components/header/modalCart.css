@@ -1,0 +1,12 @@
+.trans {
+  transform: translate(437px, -26px);
+}
+
+.btnCheckout {
+  padding: 5px 15px;
+  margin-right: 3px;
+}
+
+.bgDark {
+  background-color: black;
+}

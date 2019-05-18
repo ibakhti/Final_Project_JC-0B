@@ -13,6 +13,8 @@ import MyAccount from "./MyAccount/MyAccount";
 import MyPassword from "./MyAccount/MyPassword";
 import MyRegAddress from "./MyAccount/MyRegAddress";
 
+import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/App.css";
+
 import { actionKeepLogin } from "./../actions";
 
 const cookie = new cookies();

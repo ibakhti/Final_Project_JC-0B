@@ -13,7 +13,7 @@ class WomenProducts extends Component {
   }
 
   productsDisplayMap = () => {
-    console.log(this.state.products);
+    // console.log(this.state.products);
     return this.state.products.map(product => {
       return (
         <div className="col-md-4 px-1" key={product.sku}>

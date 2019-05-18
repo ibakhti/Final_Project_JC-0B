@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import Modal from "./ModalCart";
+
 class HeaderUsers extends Component {
   render() {
     return (
       <div className="container-fluid mb-5">
-        <nav className="row navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="row navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
           <div className="col-md-1">
             <Link className="navbar-brand" to="/">
               <strong>B & C</strong>
@@ -84,10 +86,20 @@ class HeaderUsers extends Component {
                     </div>
                   </div>
                 </li>
+                <li className="nav-item ml-3">
+                  <button
+                    className="btn btn-light"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                  >
+                    Cart
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
         </nav>
+        <Modal />
       </div>
     );
   }
