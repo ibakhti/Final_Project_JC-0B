@@ -31,7 +31,27 @@ class Modal extends Component {
                   </span>
                 </button>
               </div>
-              <div className="modal-body">...</div>
+
+              <div className="modal-body">
+                <div className="container-fluid">
+                  <div className="row">
+                    <div className="col-md">
+                      <img
+                        src="https://images.pexels.com/photos/1598508/pexels-photo-1598508.jpeg?cs=srgb&dl=brand-design-fashion-1598508.jpg&fm=jpg"
+                        alt="shoes"
+                        className="imgCart"
+                      />
+                    </div>
+                    <div className="col-md">
+                      <p>Lorem ipsum</p>
+                      <p>price</p>
+                      <p>Quantity</p>
+                      <button className="btn btn-dark">remove</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="modal-footer">
                 <button type="button" className="btn btn-dark btnCheckout">
                   Checkout
