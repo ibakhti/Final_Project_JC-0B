@@ -1,8 +1,39 @@
 import React, { Component } from "react";
+// import axios from "./../../config/axios";
 
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/header/modalCart.css";
 
 class Modal extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     dataCart: []
+  //   };
+  // }
+
+  cartDisplayMap = () => {
+    return this.props.dataCart.map((data, i) => {
+      return (
+        <div className="row" key={i}>
+          <div className="col-md">
+            <img
+              src={`http://localhost:8080/picture/${data.img}`}
+              alt="shoes"
+              className="imgCart"
+            />
+          </div>
+          <div className="col-md">
+            <p className="px-0 mb-0">{data.productName}</p>
+            <p className="px-0 mb-0">{data.unitPrice}</p>
+            <p className="px-0 mb-0">{`size: ${data.size}`}</p>
+            <p className="px-0 mt-0">{`quantity: ${data.quantity}`}</p>
+            <button className="btn btn-dark">remove</button>
+          </div>
+        </div>
+      );
+    });
+  };
+
   render() {
     return (
       <div>
@@ -33,23 +64,8 @@ class Modal extends Component {
               </div>
 
               <div className="modal-body">
-                <div className="container-fluid">
-                  <div className="row">
-                    <div className="col-md">
-                      <img
-                        src="https://images.pexels.com/photos/1598508/pexels-photo-1598508.jpeg?cs=srgb&dl=brand-design-fashion-1598508.jpg&fm=jpg"
-                        alt="shoes"
-                        className="imgCart"
-                      />
-                    </div>
-                    <div className="col-md">
-                      <p>Lorem ipsum</p>
-                      <p>price</p>
-                      <p>Quantity</p>
-                      <button className="btn btn-dark">remove</button>
-                    </div>
-                  </div>
-                </div>
+                <div className="container-fluid" />
+                {this.cartDisplayMap()}
               </div>
 
               <div className="modal-footer">

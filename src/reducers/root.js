@@ -9,6 +9,10 @@ const initialState = {
   error: ""
 };
 
+const initState = {
+  cart: []
+};
+
 const userAcountReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOGIN_SUCCESS":
@@ -40,6 +44,16 @@ const userAcountReducer = (state = initialState, action) => {
   }
 };
 
+const cartReducer = (state = initState, action) => {
+  switch (action.type) {
+    case "GET_CART":
+      return { ...state, cart: action.data };
+
+    default:
+      return state;
+  }
+};
 export default combineReducers({
-  account: userAcountReducer
+  account: userAcountReducer,
+  cartData: cartReducer
 });

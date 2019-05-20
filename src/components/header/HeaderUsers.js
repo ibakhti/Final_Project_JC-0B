@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import Modal from "./ModalCart";
 
 class HeaderUsers extends Component {
+  componentDidMount() {
+    this.props.actionCart(this.props.userId);
+    // console.log("component did mount header user");
+  }
+
   render() {
     return (
       <div className="container-fluid mb-5">
@@ -92,14 +97,14 @@ class HeaderUsers extends Component {
                     data-toggle="modal"
                     data-target="#exampleModal"
                   >
-                    Cart
+                    <strong>{`Cart(${this.props.dataCart.length})`}</strong>
                   </button>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
-        <Modal />
+        <Modal dataCart={this.props.dataCart} total={this.CartTotal} />
       </div>
     );
   }

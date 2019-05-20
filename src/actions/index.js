@@ -93,3 +93,16 @@ export const actionRegisterError = () => ({
   type: "REGISTER_ERROR",
   messege: ""
 });
+
+export const actionCartGetData = userId => {
+  return dispatch => {
+    axios.get(`/cart?userId=${userId}`).then(res => {
+      dispatch({
+        type: "GET_CART",
+        data: res.data
+      });
+    });
+  };
+};
+
+export const actionRemoveCart = sku => {};

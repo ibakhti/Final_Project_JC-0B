@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { actionCartGetData } from "./../../actions/index";
 import "./ProductDetail.css";
 import axios from "./../../config/axios";
 
@@ -24,6 +27,27 @@ class ProductDetail extends Component {
     });
   };
 
+  clickAddToCart = () => {
+    const userId = this.props.userId,
+      sku = this.props.match.params.sku,
+      quantity = 1,
+      sizeArr = this.refs.size.value.split(" "),
+      size = parseInt(sizeArr[1]);
+
+    axios
+      .put("/cart/add", {
+        userId,
+        sku,
+        quantity,
+        size
+      })
+      .then(res => {
+        console.log(res);
+        this.props.actionCartGetData(userId);
+      });
+    // console.log({ userId, sku, quantity, size });
+  };
+
   componentDidMount() {
     axios
       .get(`/product/detail?sku=${this.props.match.params.sku}`)
@@ -37,10 +61,6 @@ class ProductDetail extends Component {
         });
         // console.log(res.data[0]);
       });
-  }
-
-  componentDidUpdate() {
-    console.log(this.state.dataDisplay);
   }
 
   render() {
@@ -75,12 +95,15 @@ class ProductDetail extends Component {
                   </p>
                   <form>
                     <div className="form-group">
-                      <select className="form-control select-style">
+                      <select className="form-control select-style" ref="size">
                         {this.sizeStocktmap()}
                       </select>
                     </div>
                   </form>
-                  <button className="btn btn-dark btncustome">
+                  <button
+                    className="btn btn-dark btncustome"
+                    onClick={this.clickAddToCart}
+                  >
                     <strong>Add To Cart</strong>
                   </button>
                   <ul className="ulcustom">
@@ -111,4 +134,13 @@ class ProductDetail extends Component {
   }
 }
 
-export default ProductDetail;
+const mapStateToProps = state => {
+  return {
+    userId: state.account.id
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { actionCartGetData }
+)(ProductDetail);

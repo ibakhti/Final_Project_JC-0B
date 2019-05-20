@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import HeaderLogin from "./HeaderLogin";
 import HeaderUsers from "./HeaderUsers";
-import { actionLogin, actionLogout } from "../../actions";
+import { actionLogin, actionLogout, actionCartGetData } from "../../actions";
 import "./header.css";
 
 class HeaderMain extends Component {
@@ -23,6 +23,9 @@ class HeaderMain extends Component {
         <HeaderUsers
           userName={this.props.nameFromReducer}
           fnLogout={this.userLogout}
+          userId={this.props.userId}
+          actionCart={this.props.actionCartGetData}
+          dataCart={this.props.cart}
         />
       );
     }
@@ -31,11 +34,13 @@ class HeaderMain extends Component {
 
 const mapStateToProps = state => {
   return {
-    nameFromReducer: state.account.firstName
+    nameFromReducer: state.account.firstName,
+    userId: state.account.id,
+    cart: state.cartData.cart
   };
 };
 
 export default connect(
   mapStateToProps,
-  { actionLogin, actionLogout }
+  { actionLogin, actionLogout, actionCartGetData }
 )(HeaderMain);
