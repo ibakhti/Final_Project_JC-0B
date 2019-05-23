@@ -105,4 +105,20 @@ export const actionCartGetData = userId => {
   };
 };
 
-export const actionRemoveCart = sku => {};
+export const actionRemoveCart = (uId, sku) => {
+  return dispatch => {
+    axios
+      .delete("/cart/remove", { data: { userId: uId, sku: sku } })
+      .then(res => {
+        // console.log(res);
+        if (res.data.affectedRows) {
+          axios.get(`/cart?userId=${uId}`).then(res => {
+            dispatch({
+              type: "GET_CART",
+              data: res.data
+            });
+          });
+        }
+      });
+  };
+};

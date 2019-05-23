@@ -104,7 +104,11 @@ class HeaderUsers extends Component {
             </div>
           </div>
         </nav>
-        <Modal dataCart={this.props.dataCart} total={this.CartTotal} />
+        <Modal
+          dataCart={this.props.dataCart}
+          total={this.CartTotal}
+          remove={this.props.removeCart}
+        />
       </div>
     );
   }

@@ -27,7 +27,14 @@ class Modal extends Component {
             <p className="px-0 mb-0">{data.unitPrice}</p>
             <p className="px-0 mb-0">{`size: ${data.size}`}</p>
             <p className="px-0 mt-0">{`quantity: ${data.quantity}`}</p>
-            <button className="btn btn-dark">remove</button>
+            <button
+              className="btn btn-dark"
+              onClick={() => {
+                this.props.remove(data.userId, data.sku);
+              }}
+            >
+              remove
+            </button>
           </div>
         </div>
       );
