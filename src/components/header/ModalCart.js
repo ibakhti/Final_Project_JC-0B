@@ -12,33 +12,57 @@ class Modal extends Component {
   // }
 
   cartDisplayMap = () => {
-    return this.props.dataCart.map((data, i) => {
+    if (this.props.dataCart.length) {
+      return this.props.dataCart.map((data, i) => {
+        return (
+          <div className="row" key={i}>
+            <div className="col-md">
+              <img
+                src={`http://localhost:8080/picture/${data.img}`}
+                alt="shoes"
+                className="imgCart"
+              />
+            </div>
+            <div className="col-md">
+              <p className="px-0 mb-0">{data.productName}</p>
+              <p className="px-0 mb-0">{data.unitPrice}</p>
+              <p className="px-0 mb-0">{`size: ${data.size}`}</p>
+              <p className="px-0 mt-0">{`quantity: ${data.quantity}`}</p>
+              <button
+                className="btn btn-dark"
+                onClick={() => {
+                  this.props.remove(data.userId, data.sku);
+                }}
+              >
+                remove
+              </button>
+            </div>
+          </div>
+        );
+      });
+    } else {
       return (
-        <div className="row" key={i}>
-          <div className="col-md">
-            <img
-              src={`http://localhost:8080/picture/${data.img}`}
-              alt="shoes"
-              className="imgCart"
-            />
-          </div>
-          <div className="col-md">
-            <p className="px-0 mb-0">{data.productName}</p>
-            <p className="px-0 mb-0">{data.unitPrice}</p>
-            <p className="px-0 mb-0">{`size: ${data.size}`}</p>
-            <p className="px-0 mt-0">{`quantity: ${data.quantity}`}</p>
-            <button
-              className="btn btn-dark"
-              onClick={() => {
-                this.props.remove(data.userId, data.sku);
-              }}
-            >
-              remove
-            </button>
-          </div>
+        <div className="row justify-content-center">
+          <h3>Your Cart is Empty</h3>
         </div>
       );
-    });
+    }
+  };
+
+  buttonCheckout = () => {
+    if (this.props.dataCart.length) {
+      return (
+        <button
+          type="button"
+          className="btn btn-dark btnCheckout"
+          data-dismiss="modal"
+        >
+          Checkout
+        </button>
+      );
+    } else {
+      return null;
+    }
   };
 
   render() {
@@ -75,11 +99,7 @@ class Modal extends Component {
                 {this.cartDisplayMap()}
               </div>
 
-              <div className="modal-footer">
-                <button type="button" className="btn btn-dark btnCheckout">
-                  Checkout
-                </button>
-              </div>
+              <div className="modal-footer">{this.buttonCheckout()}</div>
             </div>
           </div>
         </div>
