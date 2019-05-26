@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { actionCartGetData } from "./../../actions/index";
+import {
+  actionCartGetData,
+  getProductDetailAction
+} from "./../../actions/index";
 import "./ProductDetail.css";
 import axios from "./../../config/axios";
 
@@ -9,16 +12,12 @@ class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataDisplay: [],
-      displayName: "",
-      displayPrice: "",
-      url1: ``,
-      url2: ``
+      flag: false
     };
   }
 
   sizeStocktmap = () => {
-    return this.state.dataDisplay.map((data, i) => {
+    return this.props.items.dataDisplay.map((data, i) => {
       return (
         <option key={i}>{`size ${data.unitSize}  ||   ${
           data.unitStock
@@ -27,40 +26,59 @@ class ProductDetail extends Component {
     });
   };
 
+  emptyStockNotif = () => {
+    if (this.state.flag) {
+      return (
+        <div id="notif">
+          <p>
+            This product is not avalaible right now, we'll infrom you when
+            product ready
+          </p>
+        </div>
+      );
+    }
+  };
+
   clickAddToCart = () => {
     const userId = this.props.userId,
-      sku = this.props.match.params.sku,
       quantity = 1,
       sizeArr = this.refs.size.value.split(" "),
-      size = parseInt(sizeArr[1]);
+      size = parseInt(sizeArr[1]),
+      sku = parseInt(this.props.match.params.sku),
+      pd = this.props.items.dataDisplay.filter(d => {
+        return d.sku === sku && d.unitSize === size;
+      }),
+      productId = pd[0].productId;
 
-    axios
-      .put("/cart/add", {
-        userId,
-        sku,
-        quantity,
-        size
-      })
-      .then(res => {
-        console.log(res);
-        this.props.actionCartGetData(userId);
-      });
-    // console.log({ userId, sku, quantity, size });
+    if (parseInt(sizeArr[3])) {
+      axios
+        .put("/cart/add", {
+          userId,
+          productId,
+          quantity
+        })
+        .then(res => {
+          // console.log(res);
+          axios
+            .put("/product/stock/update/minus", {
+              productId
+            })
+            .then(res => {
+              this.props.actionCartGetData(userId);
+              this.props.getProductDetailAction(this.props.match.params.sku);
+            });
+        });
+    } else {
+      this.setState({ flag: true });
+      setTimeout(() => {
+        this.setState({ flag: false });
+      }, 5000);
+    }
+    // console.log({ productId, sku, size });
   };
 
   componentDidMount() {
-    axios
-      .get(`/product/detail?sku=${this.props.match.params.sku}`)
-      .then(res => {
-        this.setState({
-          dataDisplay: res.data[1],
-          displayName: res.data[1][0].productName,
-          displayPrice: res.data[1][0].unitPrice,
-          url1: `http://localhost:8080/picture/${res.data[0][0].img}`,
-          url2: `http://localhost:8080/picture/${res.data[0][1].img}`
-        });
-        // console.log(res.data[0]);
-      });
+    this.props.getProductDetailAction(this.props.match.params.sku);
   }
 
   render() {
@@ -70,12 +88,12 @@ class ProductDetail extends Component {
           <div className="row pt-5">
             <div className="col-md">
               <img
-                src={this.state.url1}
+                src={this.props.items.url1}
                 alt="shoes"
                 className="img-thumbnail my-5 images"
               />
               <img
-                src={this.state.url2}
+                src={this.props.items.url2}
                 alt="shoes"
                 className="img-thumbnail my-5 images moveout"
               />
@@ -89,9 +107,9 @@ class ProductDetail extends Component {
             <div className="col-md">
               <div className="row justify-content-center pt-5">
                 <div className="col-md-7">
-                  <h2>{this.state.displayName}</h2>
+                  <h2>{this.props.items.displayName}</h2>
                   <p className="pb-5 pt-3">
-                    <strong>{this.state.displayPrice}</strong>
+                    <strong>{this.props.items.displayPrice}</strong>
                   </p>
                   <form>
                     <div className="form-group">
@@ -106,10 +124,11 @@ class ProductDetail extends Component {
                   >
                     <strong>Add To Cart</strong>
                   </button>
+                  {this.emptyStockNotif()}
                   <ul className="ulcustom">
                     <li>
                       <i className="fa fa-check" aria-hidden="true" />
-                      Lorem ipsum dolor sit amet, consectetur adipiscing.
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
                     </li>
                     <li>
                       <i className="fa fa-check" aria-hidden="true" />
@@ -136,11 +155,12 @@ class ProductDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.account.id
+    userId: state.account.id,
+    items: state.products
   };
 };
 
 export default connect(
   mapStateToProps,
-  { actionCartGetData }
+  { actionCartGetData, getProductDetailAction }
 )(ProductDetail);

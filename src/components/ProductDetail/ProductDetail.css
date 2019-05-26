@@ -1,3 +1,9 @@
+#notif {
+  border: 1px solid black;
+  margin: 1.5em;
+  padding: 0.5em;
+}
+
 .images {
   width: 100%;
   height: auto;

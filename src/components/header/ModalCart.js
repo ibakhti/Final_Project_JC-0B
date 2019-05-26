@@ -31,7 +31,7 @@ class Modal extends Component {
               <button
                 className="btn btn-dark"
                 onClick={() => {
-                  this.props.remove(data.userId, data.sku);
+                  this.props.remove(data.userId, data.productId, data.sku);
                 }}
               >
                 remove

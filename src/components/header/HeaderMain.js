@@ -7,7 +7,8 @@ import {
   actionLogin,
   actionLogout,
   actionCartGetData,
-  actionRemoveCart
+  actionRemoveCart,
+  getProductDetailAction
 } from "../../actions";
 import "./header.css";
 
@@ -18,6 +19,11 @@ class HeaderMain extends Component {
 
   userLogout = () => {
     this.props.actionLogout();
+  };
+
+  removeCart = (userId, productId, sku) => {
+    this.props.actionRemoveCart(userId, productId, sku);
+    console.log({ userId, productId, sku });
   };
 
   render() {
@@ -31,7 +37,7 @@ class HeaderMain extends Component {
           userId={this.props.userId}
           actionCart={this.props.actionCartGetData}
           dataCart={this.props.cart}
-          removeCart={this.props.actionRemoveCart}
+          removeCart={this.removeCart}
         />
       );
     }
@@ -48,5 +54,11 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { actionLogin, actionLogout, actionCartGetData, actionRemoveCart }
+  {
+    actionLogin,
+    actionLogout,
+    actionCartGetData,
+    actionRemoveCart,
+    getProductDetailAction
+  }
 )(HeaderMain);
