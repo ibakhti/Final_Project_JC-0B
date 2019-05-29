@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import HeaderLogin from "./HeaderLogin";
@@ -13,6 +14,13 @@ import {
 import "./header.css";
 
 class HeaderMain extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flag: false
+    };
+  }
+
   userLogin = (email, password) => {
     this.props.actionLogin(email, password);
   };
@@ -26,19 +34,38 @@ class HeaderMain extends Component {
     console.log({ userId, productId, sku });
   };
 
+  CheckOut = () => {
+    this.setState({ flag: true });
+  };
+
+  redirectToCheckOut = () => {
+    setInterval(() => {
+      this.setState({ flag: false });
+    }, 5000);
+    if (this.state.flag) {
+      return <Redirect to="/checkout" />;
+    } else {
+      return null;
+    }
+  };
+
   render() {
     if (!this.props.nameFromReducer) {
       return <HeaderLogin fnLogin={this.userLogin} />;
     } else {
       return (
-        <HeaderUsers
-          userName={this.props.nameFromReducer}
-          fnLogout={this.userLogout}
-          userId={this.props.userId}
-          actionCart={this.props.actionCartGetData}
-          dataCart={this.props.cart}
-          removeCart={this.removeCart}
-        />
+        <div>
+          <HeaderUsers
+            userName={this.props.nameFromReducer}
+            fnLogout={this.userLogout}
+            userId={this.props.userId}
+            actionCart={this.props.actionCartGetData}
+            dataCart={this.props.cart}
+            removeCart={this.removeCart}
+            checkout={this.CheckOut}
+          />
+          {this.redirectToCheckOut()}
+        </div>
       );
     }
   }

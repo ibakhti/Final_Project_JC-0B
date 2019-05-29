@@ -108,6 +108,7 @@ class HeaderUsers extends Component {
           dataCart={this.props.dataCart}
           total={this.CartTotal}
           remove={this.props.removeCart}
+          checkout={this.props.checkout}
         />
       </div>
     );

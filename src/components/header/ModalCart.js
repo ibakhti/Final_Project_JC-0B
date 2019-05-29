@@ -53,9 +53,11 @@ class Modal extends Component {
     if (this.props.dataCart.length) {
       return (
         <button
+          to="/checkout"
           type="button"
           className="btn btn-dark btnCheckout"
           data-dismiss="modal"
+          onClick={this.props.checkout}
         >
           Checkout
         </button>

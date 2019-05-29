@@ -1,0 +1,9 @@
+.imgc {
+  width: 100%;
+}
+
+.fixed {
+  position: fixed;
+  max-height: 100vh;
+  overflow-y: auto;
+}
