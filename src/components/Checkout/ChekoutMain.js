@@ -1,34 +1,46 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { orderItemList } from "./../../actions/index";
+import {
+  orderItemList,
+  shippingListAction,
+  shippersListAction,
+  shippingPriceAction
+} from "./../../actions/index";
 
 import ItemList from "./ItemList";
 import Address from "./Address";
-import Shipping from "./Shipping";
-import Payment from "./Payment";
+import Sp from "./Sp";
 
 class ChekoutMain extends Component {
   componentDidMount() {
     this.props.orderItemList(this.props.userId);
+    this.props.shippingListAction();
+    this.props.shippersListAction();
   }
+
+  // componentDidUpdate() {
+  //   console.log(this.props.shipping);
+  // }
+
   render() {
     return (
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-4 fixed">
-            <ItemList data={this.props.display} total={this.props.total} />
+            <ItemList
+              data={this.props.display}
+              total={this.props.total}
+              shPrice={this.props.shippingPrice}
+            />
           </div>
           <div className="col-md offset-4">
             <Address />
-            <div className="row">
-              <div className="col-md">
-                <Shipping />
-              </div>
-              <div className="col-md">
-                <Payment />
-              </div>
-            </div>
+            <Sp
+              shipping={this.props.shipping}
+              shippers={this.props.shippers}
+              shAction={this.props.shippingPriceAction}
+            />
           </div>
         </div>
       </div>
@@ -40,10 +52,13 @@ const mapStateToProps = state => {
   return {
     userId: state.account.id,
     display: state.checkout.data,
-    total: state.checkout.total
+    total: state.checkout.total,
+    shipping: state.checkout.shipping,
+    shippers: state.checkout.shippers,
+    shippingPrice: state.checkout.price
   };
 };
 export default connect(
   mapStateToProps,
-  { orderItemList }
+  { orderItemList, shippingListAction, shippersListAction, shippingPriceAction }
 )(ChekoutMain);

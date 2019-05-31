@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/Checkout/checkout.css";
 class ItemList extends Component {
   itemListDisplay = () => {
-    return this.props.data.map(item => {
+    return this.props.data.map((item, i) => {
       return (
-        <div className="row border-bottom border-dark">
+        <div className="row border-bottom border-dark" key={i}>
           <div className="col-md py-1">
             <img
               src={`http://localhost:8080/picture/${item.img}`}
@@ -34,10 +34,16 @@ class ItemList extends Component {
         {this.itemListDisplay()}
         <div className="row justify-content-end ml-5 my-3">
           <div className="col-md pl-5">
-            <p>Total:</p>
+            <p>Shipping:</p>
+            <p>Grand Total:</p>
           </div>
           <div className="col-md pl-5 ml-5">
-            <strong className="">{this.props.total}</strong>
+            <div>
+              <strong>{this.props.shPrice}</strong>
+            </div>
+            <div className="mt-3">
+              <strong>{this.props.total + this.props.shPrice}</strong>
+            </div>
           </div>
         </div>
       </div>

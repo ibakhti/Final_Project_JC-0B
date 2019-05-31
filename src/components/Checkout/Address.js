@@ -5,6 +5,7 @@ class Address extends Component {
     return (
       <div>
         <h1 className="display-4">Send To Address</h1>
+        <div style={{ height: "200px" }} />
       </div>
     );
   }

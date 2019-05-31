@@ -7,3 +7,18 @@
   max-height: 100vh;
   overflow-y: auto;
 }
+
+.btnc {
+  width: 90%;
+  text-align: start;
+}
+
+.w {
+  width: 100%;
+  border: 0.05em solid black;
+  padding-left: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  background-color: black;
+  color: white;
+}

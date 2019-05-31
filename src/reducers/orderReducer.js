@@ -1,6 +1,9 @@
 const init = {
   data: [],
-  total: null
+  total: null,
+  shipping: [],
+  shippers: [],
+  price: 0
 };
 
 const orderReducer = (state = init, action) => {
@@ -12,6 +15,23 @@ const orderReducer = (state = init, action) => {
         total: action.data[1][0].subTotal
       };
 
+    case "SHIPPING_LIST":
+      return {
+        ...state,
+        shipping: action.data
+      };
+
+    case "SHIPPERS_LIST":
+      return {
+        ...state,
+        shippers: action.data
+      };
+
+    case "SHIPPING_PRICE":
+      return {
+        ...state,
+        price: action.data
+      };
     default:
       return state;
   }
