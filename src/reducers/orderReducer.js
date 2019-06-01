@@ -3,7 +3,10 @@ const init = {
   total: null,
   shipping: [],
   shippers: [],
-  price: 0
+  price: 0,
+  shipper: "",
+  duration: "",
+  compDur: ""
 };
 
 const orderReducer = (state = init, action) => {
@@ -30,7 +33,10 @@ const orderReducer = (state = init, action) => {
     case "SHIPPING_PRICE":
       return {
         ...state,
-        price: action.data
+        price: action.price,
+        shipper: action.shipper,
+        duration: action.duration,
+        compDur: action.compDur
       };
     default:
       return state;

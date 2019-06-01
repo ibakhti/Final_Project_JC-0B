@@ -40,6 +40,9 @@ class ChekoutMain extends Component {
               shipping={this.props.shipping}
               shippers={this.props.shippers}
               shAction={this.props.shippingPriceAction}
+              shipper={this.props.shipper}
+              duration={this.props.duration}
+              cdur={this.props.compDur}
             />
           </div>
         </div>
@@ -55,7 +58,10 @@ const mapStateToProps = state => {
     total: state.checkout.total,
     shipping: state.checkout.shipping,
     shippers: state.checkout.shippers,
-    shippingPrice: state.checkout.price
+    shippingPrice: state.checkout.price,
+    shipper: state.checkout.shipper,
+    duration: state.checkout.duration,
+    compDur: state.checkout.compDur
   };
 };
 export default connect(

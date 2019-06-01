@@ -6,16 +6,18 @@ class Sp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shipper: "",
-      duration: ""
+      shipper: this.props.shipper,
+      duration: this.props.cdur
     };
   }
   takeShippingData = (sh, du) => {
-    const dur = du.split(",");
-    const rawPrice = du.split("price:");
-    const price = parseInt(rawPrice[1].trim());
-    this.setState({ shipper: sh, duration: dur[0] });
-    this.props.shAction(price);
+    if (sh !== "" && du !== "") {
+      const dur = du.split(",");
+      const rawPrice = du.split("price:");
+      const price = parseInt(rawPrice[1].trim());
+      this.setState({ shipper: sh, duration: dur[0] });
+      this.props.shAction(price, sh, du, dur[0]);
+    }
     // console.log(price);
   };
 
@@ -36,6 +38,8 @@ class Sp extends Component {
                   dataShipping={this.props.shipping}
                   dataShippers={this.props.shippers}
                   giveShippingData={this.takeShippingData}
+                  shipper={this.props.shipper}
+                  duration={this.props.duration}
                 />
               </div>
             </div>

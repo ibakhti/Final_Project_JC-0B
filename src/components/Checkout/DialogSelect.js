@@ -26,8 +26,8 @@ function DialogSelect(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     open: false,
-    shipper: "",
-    duration: ""
+    shipper: props.shipper,
+    duration: props.duration
   });
 
   const handleChange = name => event => {
@@ -121,11 +121,11 @@ function DialogSelect(props) {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
+          <Button onClick={handleClose} color="dark">
+            <strong>Cancel</strong>
           </Button>
-          <Button onClick={handleOke} color="primary">
-            Ok
+          <Button onClick={handleOke} color="dark">
+            <strong>Ok</strong>
           </Button>
         </DialogActions>
       </Dialog>

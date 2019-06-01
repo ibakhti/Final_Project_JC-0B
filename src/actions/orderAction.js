@@ -34,9 +34,12 @@ export const shippersListAction = () => {
   };
 };
 
-export const shippingPriceAction = p => {
+export const shippingPriceAction = (p, sh, du, cdur) => {
   return {
     type: "SHIPPING_PRICE",
-    data: p
+    price: p,
+    shipper: sh,
+    duration: du,
+    compDur: cdur
   };
 };
