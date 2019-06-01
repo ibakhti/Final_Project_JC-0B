@@ -8,10 +8,9 @@ class MyAddress extends Component {
       city = this.refs.city.value,
       state = this.refs.state.value,
       zip = this.refs.zip.value,
-      phoneNumber = this.refs.phoneNumber.value,
-      userId = this.props.userId;
+      phoneNumber = this.refs.phoneNumber.value;
 
-    console.log({ userId, address, city, state, zip, phoneNumber });
+    // console.log({ userId, address, city, state, zip, phoneNumber });
 
     axios
       .put(`/users/address/update/${this.props.userId}`, {

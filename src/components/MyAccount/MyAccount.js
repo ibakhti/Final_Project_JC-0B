@@ -10,7 +10,7 @@ class MyAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {},
+      data: [],
       flagAccount: false,
       flagAddress: false
     };

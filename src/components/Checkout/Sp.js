@@ -24,7 +24,7 @@ class Sp extends Component {
   render() {
     return (
       <div>
-        <div className="row my-5">
+        <div className="row marSp">
           <div className="col-md border-right border-dark">
             <div>
               <div>

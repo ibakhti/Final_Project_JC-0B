@@ -13,12 +13,12 @@ class ItemList extends Component {
               className="imgc"
             />
           </div>
-          <div className="col-md py-1">
+          <div className="col-md py-3">
             <p className="py-0 my-0">{item.productName}</p>
             <p className="py-0 my-0">{item.size}</p>
             <p className="py-0 my-0">{item.quantity}</p>
           </div>
-          <div className="col-md py-1">
+          <div className="col-md py-3">
             <strong>{item.total}</strong>
           </div>
         </div>

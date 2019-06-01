@@ -13,6 +13,7 @@ import MyAccount from "./MyAccount/MyAccount";
 import MyPassword from "./MyAccount/MyPassword";
 import MyRegAddress from "./MyAccount/MyRegAddress";
 import Checkout from "./Checkout/ChekoutMain";
+import editAddress from "./Checkout/editAddress";
 
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/App.css";
 
@@ -40,6 +41,7 @@ class App extends Component {
           <Route path="/mypassword" component={MyPassword} />
           <Route path="/myregaddress" component={MyRegAddress} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/editaddress" component={editAddress} />
         </div>
       </BrowserRouter>
     );

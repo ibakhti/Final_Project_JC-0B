@@ -35,7 +35,11 @@ class ChekoutMain extends Component {
             />
           </div>
           <div className="col-md offset-4">
-            <Address />
+            <Address
+              userId={this.props.userId}
+              name={`${this.props.fName} ${this.props.lName}`}
+              gen={this.props.gender}
+            />
             <Sp
               shipping={this.props.shipping}
               shippers={this.props.shippers}
@@ -54,6 +58,9 @@ class ChekoutMain extends Component {
 const mapStateToProps = state => {
   return {
     userId: state.account.id,
+    fName: state.account.firstName,
+    lName: state.account.lastName,
+    gender: state.account.gender,
     display: state.checkout.data,
     total: state.checkout.total,
     shipping: state.checkout.shipping,
