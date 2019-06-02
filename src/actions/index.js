@@ -11,5 +11,6 @@ export {
   orderItemList,
   shippingListAction,
   shippersListAction,
-  shippingPriceAction
+  shippingPriceAction,
+  paymentListAction
 } from "./orderAction";

@@ -121,10 +121,10 @@ function DialogSelect(props) {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="dark">
+          <Button onClick={handleClose} color="primary">
             <strong>Cancel</strong>
           </Button>
-          <Button onClick={handleOke} color="dark">
+          <Button onClick={handleOke} color="primary">
             <strong>Ok</strong>
           </Button>
         </DialogActions>

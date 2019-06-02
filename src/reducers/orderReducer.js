@@ -6,7 +6,8 @@ const init = {
   price: 0,
   shipper: "",
   duration: "",
-  compDur: ""
+  compDur: "",
+  paylist: []
 };
 
 const orderReducer = (state = init, action) => {
@@ -38,6 +39,13 @@ const orderReducer = (state = init, action) => {
         duration: action.duration,
         compDur: action.compDur
       };
+
+    case "PAYMENT_LIST":
+      return {
+        ...state,
+        paylist: action.data
+      };
+
     default:
       return state;
   }

@@ -14,7 +14,7 @@ export const orderItemList = userId => {
 export const shippingListAction = () => {
   return dispatch => {
     axios.get("/shipping").then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       dispatch({
         type: "SHIPPING_LIST",
         data: res.data
@@ -41,5 +41,22 @@ export const shippingPriceAction = (p, sh, du, cdur) => {
     shipper: sh,
     duration: du,
     compDur: cdur
+  };
+};
+
+export const paymentListAction = () => {
+  return dispatch => {
+    axios
+      .get("/payment")
+      .then(res => {
+        // console.log(res.data);
+        dispatch({
+          type: "PAYMENT_LIST",
+          data: res.data
+        });
+      })
+      .catch(err => {
+        console.log("err from payment action:" + err);
+      });
   };
 };

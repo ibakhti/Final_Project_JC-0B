@@ -5,7 +5,8 @@ import {
   orderItemList,
   shippingListAction,
   shippersListAction,
-  shippingPriceAction
+  shippingPriceAction,
+  paymentListAction
 } from "./../../actions/index";
 
 import ItemList from "./ItemList";
@@ -17,6 +18,7 @@ class ChekoutMain extends Component {
     this.props.orderItemList(this.props.userId);
     this.props.shippingListAction();
     this.props.shippersListAction();
+    this.props.paymentListAction();
   }
 
   // componentDidUpdate() {
@@ -47,6 +49,7 @@ class ChekoutMain extends Component {
               shipper={this.props.shipper}
               duration={this.props.duration}
               cdur={this.props.compDur}
+              paylist={this.props.paylist}
             />
           </div>
         </div>
@@ -68,10 +71,17 @@ const mapStateToProps = state => {
     shippingPrice: state.checkout.price,
     shipper: state.checkout.shipper,
     duration: state.checkout.duration,
-    compDur: state.checkout.compDur
+    compDur: state.checkout.compDur,
+    paylist: state.checkout.paylist
   };
 };
 export default connect(
   mapStateToProps,
-  { orderItemList, shippingListAction, shippersListAction, shippingPriceAction }
+  {
+    orderItemList,
+    shippingListAction,
+    shippersListAction,
+    shippingPriceAction,
+    paymentListAction
+  }
 )(ChekoutMain);
