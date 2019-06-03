@@ -26,3 +26,15 @@
   width: 100px;
   height: 30px;
 }
+
+.btnbuy {
+  width: 100%;
+}
+
+.buy {
+  margin-top: 3em;
+}
+
+.redText {
+  color: red;
+}

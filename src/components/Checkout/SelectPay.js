@@ -45,7 +45,7 @@ function SelectPay(props) {
     // console.log(props.paylist);
     return props.paylist.map(item => {
       return (
-        <MenuItem key={item.paymentId} value={item.paymentName}>
+        <MenuItem key={item.paymentId} value={item.paymentId}>
           <img
             alt="bank name"
             src={`http://localhost:8080/paypict/${item.paymentImg}`}

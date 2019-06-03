@@ -8,12 +8,77 @@ import {
   shippingPriceAction,
   paymentListAction
 } from "./../../actions/index";
+import axios from "./../../config/axios";
 
 import ItemList from "./ItemList";
 import Address from "./Address";
 import Sp from "./Sp";
+import AlerDialog from "./AlertDialog";
 
 class ChekoutMain extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: this.props.userId,
+      shippingId: null,
+      paymentId: null,
+      rekNum: null,
+      open: false
+    };
+  }
+
+  buyOnclick = () => {
+    if (this.state.shippingId && this.state.paymentId && this.state.rekNum) {
+      const userId = this.props.userId,
+        shippingId = this.state.shippingId,
+        paymentId = this.state.paymentId,
+        paid = this.props.shippingPrice + this.props.total,
+        rekNum = this.state.rekNum;
+      // console.log("click");
+      axios
+        .put("/order", {
+          userId,
+          shippingId,
+          paymentId,
+          paid,
+          rekNum
+        })
+        .then(res => {
+          console.log(res);
+          const items = [];
+          this.props.display.forEach(el => {
+            const { productId, quantity, unitPrice } = el;
+            items.push({
+              orderId: res.data.insertId,
+              productId,
+              quantity,
+              unitPrice
+            });
+          });
+          axios
+            .put("/orderdetail", {
+              items
+            })
+            .then(res => console.log(res));
+        })
+        .catch(err => "err from axios order" + err);
+    } else {
+      this.setState({ open: true });
+    }
+  };
+
+  giveDatatoCheckoutMain = (name, dat) => {
+    this.setState({ [name]: dat });
+  };
+
+  giveReknum = num => {
+    this.setState({ rekNum: parseInt(num) });
+  };
+
+  closeAlert = () => {
+    this.setState({ open: false });
+  };
+
   componentDidMount() {
     this.props.orderItemList(this.props.userId);
     this.props.shippingListAction();
@@ -50,7 +115,19 @@ class ChekoutMain extends Component {
               duration={this.props.duration}
               cdur={this.props.compDur}
               paylist={this.props.paylist}
+              trans={this.giveDatatoCheckoutMain}
+              rekNum={this.giveReknum}
             />
+          </div>
+        </div>
+        <div className="row buy">
+          <div className="col-md-3 offset-9">
+            <button className="btn btn-dark btnbuy" onClick={this.buyOnclick}>
+              <strong>Buy</strong>
+            </button>
+          </div>
+          <div>
+            <AlerDialog open={this.state.open} handleClose={this.closeAlert} />
           </div>
         </div>
       </div>

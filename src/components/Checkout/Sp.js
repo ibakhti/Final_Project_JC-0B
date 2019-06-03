@@ -10,7 +10,8 @@ class Sp extends Component {
       shipper: this.props.shipper,
       duration: this.props.cdur,
       payments: [],
-      payMet: ""
+      payMet: "",
+      error: ""
     };
   }
 
@@ -19,8 +20,15 @@ class Sp extends Component {
       const dur = du.split(",");
       const rawPrice = du.split("price:");
       const price = parseInt(rawPrice[1].trim());
+
       this.setState({ shipper: sh, duration: dur[0] });
       this.props.shAction(price, sh, du, dur[0]);
+
+      const arrOb = this.props.shipping.filter(it => {
+        return it.shippingName === sh && it.duration === dur[0];
+      });
+
+      this.props.trans("shippingId", arrOb[0].id);
     }
     // console.log(price);
   };
@@ -30,12 +38,17 @@ class Sp extends Component {
       return (
         <div>
           <form className="form-group">
-            <label htmlFor="#noRek">Please Fill Your Account Number</label>
+            <label htmlFor="#noRek" className={this.state.error}>
+              Please Fill Your Account Number
+            </label>
             <input
               type="text"
               className="form-control"
               id="noRek"
               ref="noRek"
+              onChange={e => {
+                this.props.rekNum(e.target.value);
+              }}
             />
           </form>
         </div>
@@ -45,6 +58,7 @@ class Sp extends Component {
 
   getPayMet = pm => {
     this.setState({ payMet: pm });
+    this.props.trans("paymentId", pm);
   };
 
   render() {
