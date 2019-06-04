@@ -5,8 +5,11 @@ export {
   actionRegister,
   actionRegisterError
 } from "./userAction";
+
 export { actionCartGetData, actionRemoveCart } from "./cartAction";
+
 export { getProductDetailAction } from "./productAction";
+
 export {
   orderItemList,
   shippingListAction,
@@ -14,3 +17,5 @@ export {
   shippingPriceAction,
   paymentListAction
 } from "./orderAction";
+
+export { confirmPaymentAction, confirmTotalAction } from "./confirmAction";

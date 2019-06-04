@@ -1,19 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import {
   orderItemList,
   shippingListAction,
   shippersListAction,
   shippingPriceAction,
-  paymentListAction
+  paymentListAction,
+  confirmPaymentAction,
+  confirmTotalAction
 } from "./../../actions/index";
 import axios from "./../../config/axios";
 
 import ItemList from "./ItemList";
 import Address from "./Address";
 import Sp from "./Sp";
-import AlerDialog from "./AlertDialog";
+import AlertDialog from "./AlertDialog";
 
 class ChekoutMain extends Component {
   constructor(props) {
@@ -23,7 +26,8 @@ class ChekoutMain extends Component {
       shippingId: null,
       paymentId: null,
       rekNum: null,
-      open: false
+      open: false,
+      redirect: false
     };
   }
 
@@ -34,7 +38,7 @@ class ChekoutMain extends Component {
         paymentId = this.state.paymentId,
         paid = this.props.shippingPrice + this.props.total,
         rekNum = this.state.rekNum;
-      // console.log("click");
+      console.log("click");
       axios
         .put("/order", {
           userId,
@@ -44,7 +48,7 @@ class ChekoutMain extends Component {
           rekNum
         })
         .then(res => {
-          console.log(res);
+          console.log("orderOke");
           const items = [];
           this.props.display.forEach(el => {
             const { productId, quantity, unitPrice } = el;
@@ -59,10 +63,16 @@ class ChekoutMain extends Component {
             .put("/orderdetail", {
               items
             })
-            .then(res => console.log(res));
+            .then(res => {
+              console.log("orderDetail ok");
+              this.props.confirmPaymentAction(paymentId);
+              this.props.confirmTotalAction(paid);
+              this.setState({ redirect: true });
+            });
         })
-        .catch(err => "err from axios order" + err);
+        .catch(err => console.log("err from axios order" + err));
     } else {
+      console.log("else");
       this.setState({ open: true });
     }
   };
@@ -77,6 +87,14 @@ class ChekoutMain extends Component {
 
   closeAlert = () => {
     this.setState({ open: false });
+  };
+
+  redirectToConfirm = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/confirm" />;
+    } else {
+      return null;
+    }
   };
 
   componentDidMount() {
@@ -105,7 +123,6 @@ class ChekoutMain extends Component {
             <Address
               userId={this.props.userId}
               name={`${this.props.fName} ${this.props.lName}`}
-              gen={this.props.gender}
             />
             <Sp
               shipping={this.props.shipping}
@@ -127,9 +144,10 @@ class ChekoutMain extends Component {
             </button>
           </div>
           <div>
-            <AlerDialog open={this.state.open} handleClose={this.closeAlert} />
+            <AlertDialog open={this.state.open} handleClose={this.closeAlert} />
           </div>
         </div>
+        {this.redirectToConfirm()}
       </div>
     );
   }
@@ -140,7 +158,6 @@ const mapStateToProps = state => {
     userId: state.account.id,
     fName: state.account.firstName,
     lName: state.account.lastName,
-    gender: state.account.gender,
     display: state.checkout.data,
     total: state.checkout.total,
     shipping: state.checkout.shipping,
@@ -159,6 +176,8 @@ export default connect(
     shippingListAction,
     shippersListAction,
     shippingPriceAction,
-    paymentListAction
+    paymentListAction,
+    confirmPaymentAction,
+    confirmTotalAction
   }
 )(ChekoutMain);

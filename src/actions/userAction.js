@@ -17,7 +17,7 @@ export const actionLogin = (email, password) => {
         const path = window.location.pathname;
         if (path === "/register") window.location.pathname = "/";
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log("err from actionlogin" + err));
   };
 };
 
@@ -30,14 +30,17 @@ export const actionLogout = () => {
 
 export const actionKeepLogin = id => {
   return dispatch => {
-    axios.get(`/users?id=${id}`).then(res => {
-      if (res.data.length > 0) {
-        dispatch({
-          type: "LOGIN_SUCCESS",
-          userData: res.data[0]
-        });
-      }
-    });
+    axios
+      .get(`/users?id=${id}`)
+      .then(res => {
+        if (res.data.length > 0) {
+          dispatch({
+            type: "LOGIN_SUCCESS",
+            userData: res.data[0]
+          });
+        }
+      })
+      .catch(err => console.log("err from actionkeeplogin " + err));
   };
 };
 

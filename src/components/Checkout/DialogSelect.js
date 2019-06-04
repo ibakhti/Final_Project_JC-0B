@@ -44,8 +44,8 @@ function DialogSelect(props) {
   }
 
   function handleOke() {
-    props.giveShippingData(state.shipper, state.duration);
     setState({ ...state, open: false });
+    props.giveShippingData(state.shipper, state.duration);
   }
 
   const displayShippers = () => {
