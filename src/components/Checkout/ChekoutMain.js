@@ -9,7 +9,9 @@ import {
   shippingPriceAction,
   paymentListAction,
   confirmPaymentAction,
-  confirmTotalAction
+  confirmTotalAction,
+  orderIdAction,
+  deleteAllCartAction
 } from "./../../actions/index";
 import axios from "./../../config/axios";
 
@@ -50,15 +52,17 @@ class ChekoutMain extends Component {
         .then(res => {
           console.log("orderOke");
           const items = [];
+          const orderId = res.data.insertId;
           this.props.display.forEach(el => {
             const { productId, quantity, unitPrice } = el;
             items.push({
-              orderId: res.data.insertId,
+              orderId,
               productId,
               quantity,
               unitPrice
             });
           });
+          this.props.orderIdAction(orderId);
           axios
             .put("/orderdetail", {
               items
@@ -67,6 +71,7 @@ class ChekoutMain extends Component {
               console.log("orderDetail ok");
               this.props.confirmPaymentAction(paymentId);
               this.props.confirmTotalAction(paid);
+              this.props.deleteAllCartAction(userId);
               this.setState({ redirect: true });
             });
         })
@@ -178,6 +183,8 @@ export default connect(
     shippingPriceAction,
     paymentListAction,
     confirmPaymentAction,
-    confirmTotalAction
+    confirmTotalAction,
+    orderIdAction,
+    deleteAllCartAction
   }
 )(ChekoutMain);

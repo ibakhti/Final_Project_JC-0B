@@ -43,3 +43,16 @@ export const actionRemoveCart = (uId, pId, sku) => {
       });
   };
 };
+
+export const deleteAllCartAction = uId => {
+  return dispatch => {
+    axios.delete("allcart", { data: { userId: uId } }).then(res => {
+      if (res.data.affectedRows) {
+        dispatch({
+          type: "GET_CART",
+          data: []
+        });
+      }
+    });
+  };
+};

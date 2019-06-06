@@ -1,6 +1,7 @@
 const init = {
   payment: [],
-  total: null
+  total: null,
+  orderId: null
 };
 
 const confirmReducer = (state = init, action) => {
@@ -15,6 +16,11 @@ const confirmReducer = (state = init, action) => {
       return {
         ...state,
         total: action.data
+      };
+    case "ORDER_ID":
+      return {
+        ...state,
+        orderId: action.data
       };
     default:
       return state;

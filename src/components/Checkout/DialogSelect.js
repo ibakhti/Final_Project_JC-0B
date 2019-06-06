@@ -30,7 +30,7 @@ function DialogSelect(props) {
     duration: props.duration
   });
 
-  const handleChange = name => event => {
+  const handleChange = (name, c) => event => {
     // console.log(event.target);
     setState({ ...state, [name]: event.target.value });
   };
@@ -98,12 +98,7 @@ function DialogSelect(props) {
       <Button onClick={handleClickOpen}>
         <strong>Select Your Shipping Method</strong>
       </Button>
-      <Dialog
-        disableBackdropClick
-        disableEscapeKeyDown
-        open={state.open}
-        onClose={handleClose}
-      >
+      <Dialog disableEscapeKeyDown open={state.open} onClose={handleClose}>
         <DialogTitle>Fill the form</DialogTitle>
         <DialogContent>
           <form className={classes.container}>

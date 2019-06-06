@@ -23,8 +23,7 @@ const useStyles = makeStyles(theme => ({
 function SelectPay(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    transfer: "",
-    close: false
+    transfer: ""
   });
 
   const inputLabel = React.useRef(null);
@@ -36,17 +35,10 @@ function SelectPay(props) {
   function handleChange(event) {
     setValues(oldValues => ({
       ...oldValues,
-      [event.target.name]: event.target.value,
-      close: true
+      [event.target.name]: event.target.value
     }));
 
     props.payment(event.target.value);
-    setTimeout(() => {
-      setValues(oldValues => ({
-        ...oldValues,
-        close: false
-      }));
-    }, 1000);
   }
 
   const paylistDisplay = () => {
@@ -72,7 +64,7 @@ function SelectPay(props) {
         <Select
           value={values.transfer}
           onChange={handleChange}
-          onClose={values.close}
+          // open={true}
           input={
             <OutlinedInput
               labelWidth={labelWidth}

@@ -17,3 +17,10 @@ export const confirmTotalAction = t => {
     data: t
   };
 };
+
+export const orderIdAction = o => {
+  return {
+    type: "ORDER_ID",
+    data: o
+  };
+};

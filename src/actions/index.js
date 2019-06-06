@@ -6,7 +6,11 @@ export {
   actionRegisterError
 } from "./userAction";
 
-export { actionCartGetData, actionRemoveCart } from "./cartAction";
+export {
+  actionCartGetData,
+  actionRemoveCart,
+  deleteAllCartAction
+} from "./cartAction";
 
 export { getProductDetailAction } from "./productAction";
 
@@ -18,4 +22,8 @@ export {
   paymentListAction
 } from "./orderAction";
 
-export { confirmPaymentAction, confirmTotalAction } from "./confirmAction";
+export {
+  confirmPaymentAction,
+  confirmTotalAction,
+  orderIdAction
+} from "./confirmAction";
