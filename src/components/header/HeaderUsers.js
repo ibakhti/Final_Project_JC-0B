@@ -63,9 +63,9 @@ class HeaderUsers extends Component {
                     <a href="#id" className="dropdown-item">
                       Personal Information
                     </a>
-                    <a href="#id" className="dropdown-item">
+                    <Link to="/order" className="dropdown-item">
                       Order
-                    </a>
+                    </Link>
                     <a href="#id" className="dropdown-item">
                       Newsletter
                     </a>

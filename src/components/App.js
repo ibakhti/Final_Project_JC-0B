@@ -15,6 +15,7 @@ import MyRegAddress from "./MyAccount/MyRegAddress";
 import Checkout from "./Checkout/ChekoutMain";
 import EditAddress from "./Checkout/editAddress";
 import Confirm from "./Confirm/Confirm";
+import Order from "./Order/Order";
 
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/App.css";
 
@@ -44,6 +45,7 @@ class App extends Component {
           <Route path="/checkout" component={Checkout} />
           <Route path="/editaddress" component={EditAddress} />
           <Route path="/confirm" component={Confirm} />
+          <Route path="/order" component={Order} />
         </div>
       </BrowserRouter>
     );

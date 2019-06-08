@@ -9,7 +9,8 @@ class Confirm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: ""
+      url: "",
+      flag: false
     };
   }
 
@@ -26,11 +27,33 @@ class Confirm extends Component {
           "Content-Type": "multipart/form-data"
         }
       });
-      this.setState({ url: res.data.url });
+      this.setState({ url: res.data.url, flag: true });
+      setInterval(() => {
+        window.location.pathname = "/";
+      }, 7000);
     } catch (error) {
       console.log("uploadError" + error);
     }
   };
+
+  noteAfterUpload = () => {
+    if (this.state.flag) {
+      return (
+        <div className="d-flex justify-content-center my-3">
+          <p>
+            <strong>
+              Thank You. We will check your payment slip and send the product to
+              you. You can see your order status at order menu. Just second we
+              will redirect you to home page
+            </strong>
+          </p>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
+
   render() {
     return (
       <div className="container">
@@ -85,6 +108,7 @@ class Confirm extends Component {
                 <strong>Upload</strong>
               </button>
             </div>
+            {this.noteAfterUpload()}
           </div>
         </div>
       </div>
