@@ -1,6 +1,6 @@
-.trans {
-  transform: translate(437px, -26px);
-}
+/* .trans {
+  transform: translate(35%, -26px);
+} */
 
 .btnCheckout {
   padding: 5px 15px;
@@ -14,3 +14,29 @@
 .imgCart {
   width: 100%;
 }
+
+/* @media only screen and (max-width: 600px) {
+  .trans {
+    transform: translate(50px, -26px);
+  }
+}
+@media only screen and (min-width: 600px) {
+  .trans {
+    transform: translate(140px, -26px);
+  }
+}
+@media only screen and (min-width: 768px) {
+  .trans {
+    transform: translate(120px, -26px);
+  }
+}
+@media only screen and (min-width: 992px) {
+  .trans {
+    transform: translate(437px, -26px);
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .trans {
+    transform: translate(vh, -26px);
+  }
+} */

@@ -16,6 +16,7 @@ import Checkout from "./Checkout/ChekoutMain";
 import EditAddress from "./Checkout/editAddress";
 import Confirm from "./Confirm/Confirm";
 import Order from "./Order/Order";
+import Search from "./Search/Search";
 
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/App.css";
 
@@ -46,6 +47,7 @@ class App extends Component {
           <Route path="/editaddress" component={EditAddress} />
           <Route path="/confirm" component={Confirm} />
           <Route path="/order" component={Order} />
+          <Route path="/search" component={Search} />
         </div>
       </BrowserRouter>
     );

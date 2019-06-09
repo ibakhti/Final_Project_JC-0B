@@ -47,6 +47,12 @@ class HeaderUsers extends Component {
 
             <div className="col=md-1 offset-md-7 ">
               <ul className="navbar-nav">
+                <li className="nav-item">
+                  <i className="d-inline-flex fas fa-search whiteText" />
+                  <Link to="/search" className="d-inline-flex nav-link">
+                    Search
+                  </Link>
+                </li>
                 <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle whiteText"
