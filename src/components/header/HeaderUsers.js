@@ -45,7 +45,7 @@ class HeaderUsers extends Component {
               </ul>
             </div>
 
-            <div className="col=md-1 offset-md-7 ">
+            <div className="col=md-1 offset-md-6 ">
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <i className="d-inline-flex fas fa-search whiteText" />
