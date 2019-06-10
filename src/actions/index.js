@@ -3,7 +3,8 @@ export {
   actionLogout,
   actionKeepLogin,
   actionRegister,
-  actionRegisterError
+  actionRegisterError,
+  userAvatarAction
 } from "./userAction";
 
 export {

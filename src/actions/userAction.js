@@ -96,3 +96,8 @@ export const actionRegisterError = () => ({
   type: "REGISTER_ERROR",
   messege: ""
 });
+
+export const userAvatarAction = img => ({
+  type: "AVATAR_TAKE",
+  data: img
+});

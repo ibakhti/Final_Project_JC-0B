@@ -31,7 +31,7 @@ class MyAddress extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col-md">
+          <div className="col-md offset-md-2 mr-5">
             <form className="form-group">
               <label htmlFor="#firstname">Address</label>
               <input
@@ -44,7 +44,7 @@ class MyAddress extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md">
+          <div className="col-md offset-md-2">
             <form className="form-group">
               <label htmlFor="#firstname">city</label>
               <input
@@ -56,7 +56,7 @@ class MyAddress extends Component {
             </form>
           </div>
 
-          <div className="col-md">
+          <div className="col-md mr-5">
             <form className="form-group">
               <label htmlFor="#firstname">state</label>
               <input
@@ -70,7 +70,7 @@ class MyAddress extends Component {
         </div>
 
         <div className="row">
-          <div className="col-md">
+          <div className="col-md offset-md-2">
             <form className="form-group">
               <label htmlFor="#firstname">zip</label>
               <input
@@ -82,7 +82,7 @@ class MyAddress extends Component {
             </form>
           </div>
 
-          <div className="col-md">
+          <div className="col-md mr-5">
             <form className="form-group">
               <label htmlFor="#firstname">phone number</label>
               <input
@@ -96,7 +96,7 @@ class MyAddress extends Component {
         </div>
 
         <div className="row mb-5">
-          <div className="col d-flex justify-content-end">
+          <div className="col d-flex justify-content-end mr-5">
             <button className="btn btn-dark" onClick={this.submitAddress}>
               Submit
             </button>

@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 
 import MyAddress from "./MyAddress";
 import axios from "./../../config/axios";
-import { actionKeepLogin } from "./../../actions";
+import { actionKeepLogin, userAvatarAction } from "./../../actions";
+
+import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/MyAccount/MyAccount.css";
 
 class MyAccount extends Component {
   constructor(props) {
@@ -71,6 +73,26 @@ class MyAccount extends Component {
     this.setState({ flagAddress: true });
   };
 
+  fileUpload = async () => {
+    const formData = new FormData();
+    var imageFile = this.gambar;
+
+    formData.append("avatar", imageFile.files[0]);
+    formData.append("userId", this.props.userId);
+
+    try {
+      const res = await axios.put("/user/avatar", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+      // console.log(res.data);
+      this.props.userAvatarAction(res.data.img);
+    } catch (error) {
+      console.log("uploadError" + error);
+    }
+  };
+
   componentDidMount() {
     axios.get(`/users/address?userId=${this.props.userId}`).then(res => {
       if (res.status === 200) {
@@ -81,9 +103,40 @@ class MyAccount extends Component {
 
   render() {
     return (
-      <div className="container my-3">
+      <div className="container-fluid my-3">
         <div className="row pt-5">
-          <div className="col-md">
+          <div className="col-md-3 fixed">
+            <p>
+              <strong>My Account</strong>
+            </p>
+            <p>
+              <strong>Welcome {this.props.firstName}</strong>
+            </p>
+            <img
+              alt="Your Avatar"
+              src={`http://localhost:8080/user/avatar/${this.props.avatar}`}
+              className="aImg mb-3 pb-3"
+            />
+            <form>
+              <div className="form-group">
+                <input
+                  type="file"
+                  className="form-control-file"
+                  id="exampleFormControlFile1"
+                  ref={input => {
+                    this.gambar = input;
+                  }}
+                />
+              </div>
+            </form>
+            <div>
+              <button className="btn btn-dark" onClick={this.fileUpload}>
+                Upload
+              </button>
+            </div>
+          </div>
+
+          <div className="col-md offset-md-2">
             <p>
               <strong>Changed Your Personal Information</strong>
             </p>
@@ -91,7 +144,7 @@ class MyAccount extends Component {
         </div>
 
         <div className="row">
-          <div className="col-md">
+          <div className="col-md offset-md-2">
             <form className="form-group">
               <label htmlFor="#firstname">Frist Name</label>
               <input
@@ -115,7 +168,7 @@ class MyAccount extends Component {
             </form>
           </div>
 
-          <div className="col-md">
+          <div className="col-md mr-5">
             <form className="form-group">
               <label htmlFor="#lastname">Last Name</label>
               <input
@@ -159,12 +212,12 @@ class MyAccount extends Component {
         </div>
 
         <div className="row">
-          <div className="col pt-3">
+          <div className="col-md offset-md-2 pt-3">
             <Link to="/mypassword" className="text-dark">
               <strong>Changed My Password</strong>
             </Link>
           </div>
-          <div className="col d-flex justify-content-end">
+          <div className="col-md offset-md-3 d-flex justify-content-end mr-5">
             <button className="btn btn-dark" onClick={this.submitUpdateData}>
               Submit
             </button>
@@ -175,10 +228,12 @@ class MyAccount extends Component {
           <div className="col">{this.successMeessageDisplay()}</div>
         </div>
 
-        <div className="row mt-5 pt-5 pl-3">
-          <p>
-            <strong>Changed Your Address </strong>
-          </p>
+        <div className="row mt-5 pt-5">
+          <div className="col-md offset-md-2">
+            <p>
+              <strong>Changed Your Address </strong>
+            </p>
+          </div>
         </div>
         <MyAddress
           userId={this.props.userId}
@@ -187,7 +242,7 @@ class MyAccount extends Component {
         />
 
         <div className="row mt-3">
-          <div className="col">{this.successMeessageDisplay()}</div>
+          <div className="col offset-md-3">{this.successMeessageDisplay()}</div>
         </div>
       </div>
     );
@@ -200,10 +255,11 @@ const mapStateToProps = state => {
     firstName: state.account.firstName,
     lastName: state.account.lastName,
     email: state.account.email,
-    gender: state.account.gender
+    gender: state.account.gender,
+    avatar: state.account.avatar
   };
 };
 export default connect(
   mapStateToProps,
-  { actionKeepLogin }
+  { actionKeepLogin, userAvatarAction }
 )(MyAccount);
