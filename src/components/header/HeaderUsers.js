@@ -66,16 +66,12 @@ class HeaderUsers extends Component {
                   </a>
                   {/* user form */}
                   <div className="dropdown-menu dropdown-menu-right">
-                    <a href="#id" className="dropdown-item">
-                      Personal Information
-                    </a>
+                    <Link className="dropdown-item" to="/myaccount">
+                      My Account
+                    </Link>
                     <Link to="/order" className="dropdown-item">
                       Order
                     </Link>
-                    <a href="#id" className="dropdown-item">
-                      Newsletter
-                    </a>
-
                     <div className="dropdown-divider" />
                     <div className="d-flex flex-row">
                       <button
@@ -87,13 +83,6 @@ class HeaderUsers extends Component {
                       >
                         Sign Out
                       </button>
-                      <Link
-                        className="dropdown-item"
-                        id="myaccountbtn"
-                        to="/myaccount"
-                      >
-                        My Account
-                      </Link>
                     </div>
                   </div>
                 </li>

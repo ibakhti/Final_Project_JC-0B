@@ -79,6 +79,7 @@ class MyAccount extends Component {
 
     formData.append("avatar", imageFile.files[0]);
     formData.append("userId", this.props.userId);
+    formData.append("oldImg", this.props.avatar);
 
     try {
       const res = await axios.put("/user/avatar", formData, {
@@ -105,7 +106,7 @@ class MyAccount extends Component {
     return (
       <div className="container-fluid my-3">
         <div className="row pt-5">
-          <div className="col-md-3 fixed">
+          <div className="col-md-3 ml-3 fixed">
             <p>
               <strong>My Account</strong>
             </p>
@@ -136,7 +137,7 @@ class MyAccount extends Component {
             </div>
           </div>
 
-          <div className="col-md offset-md-2">
+          <div className="col-md offset-md-3">
             <p>
               <strong>Changed Your Personal Information</strong>
             </p>
@@ -144,7 +145,7 @@ class MyAccount extends Component {
         </div>
 
         <div className="row">
-          <div className="col-md offset-md-2">
+          <div className="col-md offset-md-3">
             <form className="form-group">
               <label htmlFor="#firstname">Frist Name</label>
               <input
@@ -212,7 +213,7 @@ class MyAccount extends Component {
         </div>
 
         <div className="row">
-          <div className="col-md offset-md-2 pt-3">
+          <div className="col-md offset-md-3 pt-3">
             <Link to="/mypassword" className="text-dark">
               <strong>Changed My Password</strong>
             </Link>
@@ -229,7 +230,7 @@ class MyAccount extends Component {
         </div>
 
         <div className="row mt-5 pt-5">
-          <div className="col-md offset-md-2">
+          <div className="col-md offset-md-3">
             <p>
               <strong>Changed Your Address </strong>
             </p>

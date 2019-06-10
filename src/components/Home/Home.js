@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import Carousel from "./Carousel";
 import "./home.css";
 
 class Home extends Component {
@@ -7,6 +8,10 @@ class Home extends Component {
     return (
       <div>
         {/* content */}
+
+        <div>
+          <Carousel />
+        </div>
         <div className="container mb-5">
           <div className="row pt-5">
             <p>

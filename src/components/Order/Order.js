@@ -107,7 +107,7 @@ class Order extends Component {
               this.goToConfirm(item.orderId, item.paymentId, item.paid);
             }}
           >
-            Confirm
+            Upload Transfer Slip
           </button>
         </div>
       );

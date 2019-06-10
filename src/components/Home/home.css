@@ -1,4 +1,10 @@
-#carouselpicture img {
-  max-width: 100%;
-  height: auto;
+.carousel-inner img {
+  width: 100vw;
+  height: 100vh;
+}
+
+.caption {
+  transform: translateY(-70vh);
+  font-size: 2em;
+  border: 0.05em white solid;
 }

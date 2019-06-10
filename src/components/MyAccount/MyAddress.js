@@ -31,27 +31,27 @@ class MyAddress extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col-md offset-md-2 mr-5">
+          <div className="col-md offset-md-3 mr-5">
             <form className="form-group">
               <label htmlFor="#firstname">Address</label>
               <input
                 type="text"
                 className="form-control"
                 ref="address"
-                defaultValue={this.props.user.address}
+                defaultValue={this.props.user.address || ""}
               />
             </form>
           </div>
         </div>
         <div className="row">
-          <div className="col-md offset-md-2">
+          <div className="col-md offset-md-3">
             <form className="form-group">
               <label htmlFor="#firstname">city</label>
               <input
                 type="text"
                 className="form-control"
                 ref="city"
-                defaultValue={this.props.user.city}
+                defaultValue={this.props.user.city || ""}
               />
             </form>
           </div>
@@ -63,21 +63,21 @@ class MyAddress extends Component {
                 type="text"
                 className="form-control"
                 ref="state"
-                defaultValue={this.props.user.state}
+                defaultValue={this.props.user.state || ""}
               />
             </form>
           </div>
         </div>
 
         <div className="row">
-          <div className="col-md offset-md-2">
+          <div className="col-md offset-md-3">
             <form className="form-group">
               <label htmlFor="#firstname">zip</label>
               <input
                 type="text"
                 className="form-control"
                 ref="zip"
-                defaultValue={this.props.user.zip}
+                defaultValue={this.props.user.zip || ""}
               />
             </form>
           </div>
@@ -89,7 +89,7 @@ class MyAddress extends Component {
                 type="text"
                 className="form-control"
                 ref="phoneNumber"
-                defaultValue={this.props.user.phoneNumber}
+                defaultValue={this.props.user.phoneNumber || ""}
               />
             </form>
           </div>
