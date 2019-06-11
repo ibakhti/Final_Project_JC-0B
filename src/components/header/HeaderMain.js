@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import HeaderLogin from "./HeaderLogin";
 import HeaderUsers from "./HeaderUsers";
+import HeaderAdmin from "./HeaderAdmin";
 import {
   actionLogin,
   actionLogout,
@@ -50,22 +51,31 @@ class HeaderMain extends Component {
   };
 
   render() {
-    if (!this.props.nameFromReducer) {
-      return <HeaderLogin fnLogin={this.userLogin} />;
+    if (!this.props.isAdmin) {
+      if (!this.props.nameFromReducer) {
+        return <HeaderLogin fnLogin={this.userLogin} />;
+      } else {
+        return (
+          <div>
+            <HeaderUsers
+              userName={this.props.nameFromReducer}
+              fnLogout={this.userLogout}
+              userId={this.props.userId}
+              actionCart={this.props.actionCartGetData}
+              dataCart={this.props.cart}
+              removeCart={this.removeCart}
+              checkout={this.CheckOut}
+            />
+            {this.redirectToCheckOut()}
+          </div>
+        );
+      }
     } else {
       return (
-        <div>
-          <HeaderUsers
-            userName={this.props.nameFromReducer}
-            fnLogout={this.userLogout}
-            userId={this.props.userId}
-            actionCart={this.props.actionCartGetData}
-            dataCart={this.props.cart}
-            removeCart={this.removeCart}
-            checkout={this.CheckOut}
-          />
-          {this.redirectToCheckOut()}
-        </div>
+        <HeaderAdmin
+          userName={this.props.nameFromReducer}
+          fnLogout={this.userLogout}
+        />
       );
     }
   }
@@ -75,6 +85,7 @@ const mapStateToProps = state => {
   return {
     nameFromReducer: state.account.firstName,
     userId: state.account.id,
+    isAdmin: state.account.isAdmin,
     cart: state.cartData.cart
   };
 };

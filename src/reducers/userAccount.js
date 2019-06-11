@@ -5,6 +5,7 @@ const initialState = {
   email: "",
   gender: "",
   avatar: "",
+  isAdmin: 0,
   error: ""
 };
 
@@ -18,7 +19,8 @@ const userAcountReducer = (state = initialState, action) => {
         lastName: action.userData.lastName,
         email: action.userData.email,
         gender: action.userData.gender,
-        avatar: action.userData.avatar
+        avatar: action.userData.avatar,
+        isAdmin: action.userData.isAdmin
       };
     case "LOGOUT_SUCCESS":
       return {
@@ -28,7 +30,8 @@ const userAcountReducer = (state = initialState, action) => {
         lastName: "",
         email: "",
         gender: "",
-        avatar: ""
+        avatar: "",
+        isAdmin: 0
       };
     case "REGISTER_ERROR":
       return {
