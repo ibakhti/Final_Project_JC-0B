@@ -1,0 +1,45 @@
+.linkBlack {
+  color: black;
+}
+
+.inline {
+  display: flex;
+  justify-content: center;
+}
+.form {
+  display: flex;
+  justify-content: center;
+  width: 75%;
+  border: 0.005em solid black;
+  margin-top: 2em;
+  padding-top: 1em;
+  background-color: black;
+  color: white;
+}
+
+.block {
+  display: block;
+  width: 75%;
+  margin-top: 1em;
+}
+
+.block .row {
+  width: 100%;
+}
+
+.pict {
+  width: 100%;
+  height: 140px;
+  border: 0.15em dotted black;
+  text-align: center;
+}
+
+.pict img {
+  width: 100%;
+  height: 100%;
+}
+
+.row button {
+  width: 100%;
+  background-color: black;
+}

@@ -12,7 +12,7 @@
 .iconBook {
   font-size: 10.71em;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .iconBook div {
@@ -28,7 +28,7 @@
 .iconList {
   font-size: 10.71em;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .iconList div {

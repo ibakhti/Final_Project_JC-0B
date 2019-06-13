@@ -11,7 +11,7 @@ class HomeAdmin extends Component {
               <p>
                 <i className="fas fa-book" />
               </p>
-              <Link to="/" className="blc">
+              <Link to="/manage" className="blc">
                 <p id="menage">Menage Products</p>
               </Link>
             </div>
@@ -19,7 +19,7 @@ class HomeAdmin extends Component {
           <div className="col-md pl-0 iconList">
             <div>
               <i class="fas fa-clipboard-list" />
-              <Link to="/" className="blc">
+              <Link to="/order" className="blc">
                 <p id="order">Orders</p>
               </Link>
             </div>
