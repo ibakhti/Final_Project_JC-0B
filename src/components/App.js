@@ -21,6 +21,7 @@ import Search from "./Search/Search";
 import HomeAdmin from "./Home/HomeAdmin";
 import ManageProduct from "./MenageProduct/MenageProduct";
 import AddProduct from "./MenageProduct/AddProduct";
+import Edit from "./MenageProduct/Edit";
 
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/App.css";
 
@@ -64,6 +65,7 @@ class App extends Component {
             <Route path="/" exact component={HomeAdmin} />
             <Route path="/manage" component={ManageProduct} />
             <Route path="/addproduct" component={AddProduct} />
+            <Route path="/edit/:pid/:sku" component={Edit} />
           </div>
         </BrowserRouter>
       );

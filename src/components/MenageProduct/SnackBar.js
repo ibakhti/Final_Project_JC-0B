@@ -9,6 +9,7 @@ const SnackBar = props => {
         key="top left"
         open={props.open}
         autoHideDuration={6000}
+        onClose={props.handleClose}
         ContentProps={{
           "aria-describedby": "message-id"
         }}

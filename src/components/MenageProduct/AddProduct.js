@@ -19,9 +19,10 @@ class AddProduct extends Component {
 
   openSnackBar = txt => {
     this.setState({ open: true, message: txt });
-    setInterval(() => {
-      this.setState({ open: false });
-    }, 5000);
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   fileUpload = async (sku, n) => {
@@ -107,10 +108,23 @@ class AddProduct extends Component {
               })
               .then(res => {
                 if (res.data.affectedRows) {
-                  // for (let i = 1; i < 4; i++) {
-                  //   this.fileUpload(sku, i);
-                  // }
                   this.fileUpload(sku, 1);
+                }
+              });
+          } else {
+            axios
+              .post("/products/size", {
+                sku,
+                unitSize,
+                unitStock
+              })
+              .then(res => {
+                if (res.data.affectedRows) {
+                  this.openSnackBar("Size and Stock Upload Success");
+                } else if (res.data.exist) {
+                  this.openSnackBar("SKU or Size already exist");
+                } else {
+                  this.openSnackBar("Error");
                 }
               });
           }
@@ -163,15 +177,15 @@ class AddProduct extends Component {
               </div>
 
               <div className="form-group row">
-                <label htmlFor="#size" className="col-sm-1 col-form-label">
-                  Size
+                <label htmlFor="#price" className="col-sm-2 col-form-label">
+                  Unit Price
                 </label>
-                <div className="col-sm-5">
+                <div className="col-sm-4">
                   <input
                     type="number"
                     className="form-control"
-                    id="size"
-                    ref="size"
+                    id="price"
+                    ref="price"
                   />
                 </div>
                 <label htmlFor="#color" className="col-sm-1 col-form-label">
@@ -202,22 +216,22 @@ class AddProduct extends Component {
                   </select>
                 </div>
 
-                <label htmlFor="#price" className="col-sm-2 col-form-label">
-                  Unit Price
+                <label htmlFor="#size" className="col-sm-1 col-form-label">
+                  Size
                 </label>
                 <div className="col-sm-3">
                   <input
                     type="number"
                     className="form-control"
-                    id="price"
-                    ref="price"
+                    id="size"
+                    ref="size"
                   />
                 </div>
 
                 <label htmlFor="#stock" className="col-sm-1 col-form-label">
                   Stock
                 </label>
-                <div className="col-sm-2">
+                <div className="col-sm-3">
                   <input
                     type="number"
                     className="form-control"
@@ -286,7 +300,7 @@ class AddProduct extends Component {
                 </div>
               </div>
             </form>
-            <div className="row justify-content-end">
+            <div className="row justify-content-end add">
               <div className="col-sm-4 py-4">
                 <button className="btn btn-dark" onClick={this.submitFn}>
                   <strong>Add</strong>
@@ -295,7 +309,11 @@ class AddProduct extends Component {
             </div>
           </div>
         </div>
-        <SnackBar open={this.state.open} message={this.state.message} />
+        <SnackBar
+          open={this.state.open}
+          message={this.state.message}
+          handleClose={this.handleClose}
+        />
       </div>
     );
   }
