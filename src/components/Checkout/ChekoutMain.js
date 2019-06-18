@@ -54,10 +54,18 @@ class ChekoutMain extends Component {
           const items = [];
           const orderId = res.data.insertId;
           this.props.display.forEach(el => {
-            const { productId, productName, size, quantity, unitPrice } = el;
+            const {
+              productId,
+              sku,
+              productName,
+              size,
+              quantity,
+              unitPrice
+            } = el;
             items.push({
               orderId,
               productId,
+              sku,
               productName,
               size,
               quantity,

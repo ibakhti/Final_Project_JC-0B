@@ -22,6 +22,11 @@ import HomeAdmin from "./Home/HomeAdmin";
 import ManageProduct from "./MenageProduct/MenageProduct";
 import AddProduct from "./MenageProduct/AddProduct";
 import Edit from "./MenageProduct/Edit";
+import OrderAdmin from "./OrderAdmin/OrderAdmin";
+import OrderDetail from "./OrderAdmin/OrderDetail";
+import UserProfile from "./OrderAdmin/UserProfile";
+import Sent from "./OrderAdmin/Sent";
+import Completed from "./OrderAdmin/Completed";
 
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/App.css";
 
@@ -66,6 +71,11 @@ class App extends Component {
             <Route path="/manage" component={ManageProduct} />
             <Route path="/addproduct" component={AddProduct} />
             <Route path="/edit/:pid/:sku" component={Edit} />
+            <Route path="/order" component={OrderAdmin} />
+            <Route path="/detail/:orderId" component={OrderDetail} />
+            <Route path="/userProfile/:userId" component={UserProfile} />
+            <Route path="/sent/:orderId/:userId" component={Sent} />
+            <Route path="/completed" component={Completed} />
           </div>
         </BrowserRouter>
       );

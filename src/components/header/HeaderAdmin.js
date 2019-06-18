@@ -27,10 +27,10 @@ class HeaderAdmin extends Component {
                   </a>
                   {/* user form */}
                   <div className="dropdown-menu dropdown-menu-right">
-                    <Link className="dropdown-item" to="/">
+                    <Link className="dropdown-item" to="/manage">
                       Menage Products
                     </Link>
-                    <Link to="/" className="dropdown-item">
+                    <Link to="/order" className="dropdown-item">
                       Order
                     </Link>
                     <div className="dropdown-divider" />

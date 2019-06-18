@@ -98,7 +98,7 @@ class ProductDetail extends Component {
                 className="img-thumbnail my-5 images moveout"
               />
               <img
-                src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
+                src={this.props.items.url3}
                 alt="shoes"
                 className="img-thumbnail my-5 images moveout70"
               />

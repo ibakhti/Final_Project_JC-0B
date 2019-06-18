@@ -3,7 +3,8 @@ const initState = {
   displayName: "",
   displayPrice: "",
   url1: "",
-  url2: ""
+  url2: "",
+  url3: ""
 };
 
 const pdReducer = (state = initState, action) => {
@@ -15,7 +16,8 @@ const pdReducer = (state = initState, action) => {
         displayName: action.data[1][0].productName,
         displayPrice: action.data[1][0].unitPrice,
         url1: `http://localhost:8080/picture/${action.data[0][0].img}`,
-        url2: `http://localhost:8080/picture/${action.data[0][1].img}`
+        url2: `http://localhost:8080/picture/${action.data[0][1].img}`,
+        url3: `http://localhost:8080/picture/${action.data[0][2].img}`
       };
 
     default:

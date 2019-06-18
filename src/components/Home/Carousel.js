@@ -15,7 +15,7 @@ class Carousel extends Component {
               src="https://images.unsplash.com/photo-1512654755163-0f342db4466f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"
               alt="First slide"
             />
-            <div class="carousel-caption d-none d-md-block caption">
+            <div className="carousel-caption d-none d-md-block caption">
               <h5>
                 <strong>B & C</strong>
               </h5>
@@ -28,7 +28,7 @@ class Carousel extends Component {
               src="https://images.unsplash.com/photo-1512640122685-e77ab16ad8c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
               alt="Second slide"
             />
-            <div class="carousel-caption d-none d-md-block caption">
+            <div className="carousel-caption d-none d-md-block caption">
               <h5>
                 <strong>B & C</strong>
               </h5>
@@ -41,7 +41,7 @@ class Carousel extends Component {
               src="https://images.unsplash.com/photo-1459173422306-0ce3fb37f832?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
               alt="Third slide"
             />
-            <div class="carousel-caption d-none d-md-block caption">
+            <div className="carousel-caption d-none d-md-block caption">
               <h5>
                 <strong>B & C</strong>
               </h5>

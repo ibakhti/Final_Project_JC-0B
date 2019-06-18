@@ -80,9 +80,9 @@ class Order extends Component {
   };
 
   statusPayment = item => {
-    if (item.paymentDate && item.fulfill) {
+    if (item.transferImg && item.fulfill) {
       return "Send";
-    } else if (item.paymentDate) {
+    } else if (item.transferImg) {
       return "Waiting Confirmation";
     } else {
       return "Waiting Your Payment";
@@ -98,7 +98,7 @@ class Order extends Component {
   };
 
   buttonConfirm = item => {
-    if (!item.paymentDate && !item.fulfill) {
+    if (!item.transferImg && !item.fulfill) {
       return (
         <div className="d-inline-flex mx-3 mb-3">
           <button
