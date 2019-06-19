@@ -23,6 +23,8 @@ export const actionLogin = (email, password) => {
 
 export const actionLogout = () => {
   cookie.remove("userCookie");
+  window.location.pathname = "/";
+
   return {
     type: "LOGOUT_SUCCESS"
   };

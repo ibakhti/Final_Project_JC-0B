@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "../../config/axios";
 
 class SentDetail extends Component {

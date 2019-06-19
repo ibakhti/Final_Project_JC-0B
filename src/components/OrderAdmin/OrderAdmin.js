@@ -38,9 +38,9 @@ class OrderAdmin extends Component {
     return this.state.data.map((it, i) => {
       return (
         <tr key={i}>
-          <th scope="row">
+          <td>
             <Link to={`/detail/${it.orderId}`}>{it.orderId}</Link>
-          </th>
+          </td>
           <td>
             <Link to={`/userprofile/${it.userId}`}>{it.userId}</Link>
           </td>

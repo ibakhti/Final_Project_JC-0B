@@ -25,3 +25,29 @@
 .whiteText {
   color: #fffefe !important;
 }
+
+.logo {
+  color: white;
+  animation-name: sipnner;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+.klip {
+  animation-name: sipnner;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+.anim {
+  transform: rotate(270deg);
+}
+
+@keyframes spinner {
+  0% {
+    color: white;
+  }
+  100% {
+    color: black;
+  }
+}

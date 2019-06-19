@@ -7,6 +7,9 @@ class HeaderAdmin extends Component {
       <div className="container-fluid mb-5">
         <nav className="row navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
           <div className="col-md">
+            <span className="logo">
+              <i className="fas fa-shoe-prints" />
+            </span>
             <Link className="navbar-brand" to="/">
               <strong>B & C</strong>
             </Link>

@@ -14,7 +14,10 @@ class HeaderUsers extends Component {
       <div className="container-fluid mb-5">
         <nav className="row navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
           <div className="col-md-1">
-            <Link className="navbar-brand" to="/">
+            <span className="logo">
+              <i className="fas fa-shoe-prints anim" />
+            </span>
+            <Link className="navbar-brand klip" to="/">
               <strong>B & C</strong>
             </Link>
             <button

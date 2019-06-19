@@ -8,20 +8,35 @@ class Sent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      data: [],
       flag: false
     };
   }
 
   SendProduct = orderId => {
-    axios
-      .put("/admin/sent", {
-        orderId
-      })
-      .then(res => {
-        if (res.data.affectedRows) {
-          this.setState({ flag: true });
-        }
+    this.stockAndFulfill(orderId, 0);
+    // console.log(this.state.data);
+  };
+
+  stockAndFulfill = async (orderId, i) => {
+    // console.log([i, this.state.data.length]);
+    if (i < this.state.data.length) {
+      const res = await axios.put("/order/delete", {
+        productId: this.state.data[i].productId
       });
+      if (res.data.affectedRows) {
+        this.stockAndFulfill(orderId, i + 1);
+      }
+    } else {
+      const res = await axios.put("/admin/sent", {
+        orderId
+      });
+      // console.log(res.data.affectedRows);
+      if (res.data.affectedRows) {
+        this.setState({ flag: true });
+        return res;
+      }
+    }
   };
 
   redirectToOrder = () => {
@@ -31,6 +46,15 @@ class Sent extends Component {
       return null;
     }
   };
+
+  componentDidMount() {
+    axios
+      .get(`/admin/detail?orderId=${this.props.match.params.orderId}`)
+      .then(res => {
+        this.setState({ data: res.data });
+      });
+  }
+
   render() {
     return (
       <div className="container">
