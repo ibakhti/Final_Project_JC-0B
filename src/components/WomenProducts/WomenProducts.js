@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "./../../config/axios";
 
+import { CSSTransitionGroup } from "react-transition-group";
+
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/WomenProducts/WomenProductcss.css";
 
 class WomenProducts extends Component {
@@ -45,7 +47,14 @@ class WomenProducts extends Component {
             <strong>Women Collection</strong>
           </p>
         </div>
-        <div className="row pb-5">{this.productsDisplayMap()}</div>
+        <CSSTransitionGroup
+          transitionName="ex"
+          transitionEnterTimeout={5000}
+          transitionLeaveTimeout={3000}
+          className="row pb-5"
+        >
+          {this.productsDisplayMap()}
+        </CSSTransitionGroup>
       </div>
     );
   }

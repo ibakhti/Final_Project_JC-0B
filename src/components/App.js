@@ -17,6 +17,7 @@ import EditAddress from "./Checkout/editAddress";
 import Confirm from "./Confirm/Confirm";
 import Order from "./Order/Order";
 import Search from "./Search/Search";
+import Footer from "./Footer/Footer";
 
 import HomeAdmin from "./Home/HomeAdmin";
 import ManageProduct from "./MenageProduct/MenageProduct";
@@ -45,20 +46,23 @@ class App extends Component {
       return (
         <BrowserRouter>
           <div>
-            <HeaderMain />
-            <Route path="/" exact component={Home} />
-            <Route path="/register" component={Register} />
-            <Route path="/menproducts" component={MenProducts} />
-            <Route path="/womenproducts" component={WomenProducts} />
-            <Route path="/productdetail/:sku" component={ProductDetail} />
-            <Route path="/myaccount" component={MyAccount} />
-            <Route path="/mypassword" component={MyPassword} />
-            <Route path="/myregaddress" component={MyRegAddress} />
-            <Route path="/checkout" component={Checkout} />
-            <Route path="/editaddress" component={EditAddress} />
-            <Route path="/confirm" component={Confirm} />
-            <Route path="/order" component={Order} />
-            <Route path="/search" component={Search} />
+            <div>
+              <HeaderMain />
+              <Route path="/" exact component={Home} />
+              <Route path="/register" component={Register} />
+              <Route path="/menproducts" component={MenProducts} />
+              <Route path="/womenproducts" component={WomenProducts} />
+              <Route path="/productdetail/:sku" component={ProductDetail} />
+              <Route path="/myaccount" component={MyAccount} />
+              <Route path="/mypassword" component={MyPassword} />
+              <Route path="/myregaddress" component={MyRegAddress} />
+              <Route path="/checkout" component={Checkout} />
+              <Route path="/editaddress" component={EditAddress} />
+              <Route path="/confirm" component={Confirm} />
+              <Route path="/order" component={Order} />
+              <Route path="/search" component={Search} />
+            </div>
+            <Footer />
           </div>
         </BrowserRouter>
       );
@@ -76,6 +80,7 @@ class App extends Component {
             <Route path="/userProfile/:userId" component={UserProfile} />
             <Route path="/sent/:orderId/:userId" component={Sent} />
             <Route path="/completed" component={Completed} />
+            <Footer />
           </div>
         </BrowserRouter>
       );
