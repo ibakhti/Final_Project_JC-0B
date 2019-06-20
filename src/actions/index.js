@@ -13,7 +13,12 @@ export {
   deleteAllCartAction
 } from "./cartAction";
 
-export { getProductDetailAction } from "./productAction";
+export {
+  getProductDetailAction,
+  waitingListAction,
+  getWaitingAction,
+  delWaitingAction
+} from "./productAction";
 
 export {
   orderItemList,

@@ -4,7 +4,9 @@ const initState = {
   displayPrice: "",
   url1: "",
   url2: "",
-  url3: ""
+  url3: "",
+  dataWaiting: [],
+  noWait: 0
 };
 
 const pdReducer = (state = initState, action) => {
@@ -20,6 +22,14 @@ const pdReducer = (state = initState, action) => {
         url3: `http://localhost:8080/picture/${action.data[0][2].img}`
       };
 
+    case "WAITING":
+      return {
+        ...state,
+        dataWaiting: action.data,
+        noWait: action.data.filter(a => {
+          return a.stockDisplay !== 0;
+        }).length
+      };
     default:
       return state;
   }

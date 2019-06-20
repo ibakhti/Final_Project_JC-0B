@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import CheckBox from "./CheckBox";
+
 import {
   actionCartGetData,
-  getProductDetailAction
+  getProductDetailAction,
+  waitingListAction
 } from "./../../actions/index";
 import "./ProductDetail.css";
 import axios from "./../../config/axios";
@@ -12,7 +15,10 @@ class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flag: false
+      flag: false,
+      userId: null,
+      productId: null,
+      checked: false
     };
   }
 
@@ -34,9 +40,20 @@ class ProductDetail extends Component {
             This product is not avalaible right now, we'll infrom you when
             product ready
           </p>
+          <CheckBox
+            checked={this.state.checked}
+            handleChange={this.handleChange}
+          />
         </div>
       );
     }
+  };
+
+  handleChange = e => {
+    this.setState({ checked: true });
+    // console.log([this.state.userId, this.state.productId]);
+
+    this.props.waitingListAction(this.state.userId, this.state.productId);
   };
 
   clickAddToCart = () => {
@@ -69,10 +86,10 @@ class ProductDetail extends Component {
             });
         });
     } else {
-      this.setState({ flag: true });
+      this.setState({ flag: true, userId: userId, productId: productId });
       setTimeout(() => {
         this.setState({ flag: false });
-      }, 5000);
+      }, 7000);
     }
     // console.log({ productId, sku, size });
   };
@@ -162,5 +179,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { actionCartGetData, getProductDetailAction }
+  { actionCartGetData, getProductDetailAction, waitingListAction }
 )(ProductDetail);

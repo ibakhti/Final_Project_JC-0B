@@ -10,7 +10,8 @@ import {
   actionLogout,
   actionCartGetData,
   actionRemoveCart,
-  getProductDetailAction
+  getProductDetailAction,
+  getWaitingAction
 } from "../../actions";
 import "./header.css";
 
@@ -65,6 +66,8 @@ class HeaderMain extends Component {
               dataCart={this.props.cart}
               removeCart={this.removeCart}
               checkout={this.CheckOut}
+              notif={this.props.notifWait}
+              getWait={this.props.getWaitingAction}
             />
             {this.redirectToCheckOut()}
           </div>
@@ -86,7 +89,8 @@ const mapStateToProps = state => {
     nameFromReducer: state.account.firstName,
     userId: state.account.id,
     isAdmin: state.account.isAdmin,
-    cart: state.cartData.cart
+    cart: state.cartData.cart,
+    notifWait: state.products.noWait
   };
 };
 
@@ -97,6 +101,7 @@ export default connect(
     actionLogout,
     actionCartGetData,
     actionRemoveCart,
-    getProductDetailAction
+    getProductDetailAction,
+    getWaitingAction
   }
 )(HeaderMain);

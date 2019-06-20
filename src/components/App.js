@@ -18,6 +18,7 @@ import Confirm from "./Confirm/Confirm";
 import Order from "./Order/Order";
 import Search from "./Search/Search";
 import Footer from "./Footer/Footer";
+import WaitingList from "./WaitingList/WaitingList";
 
 import HomeAdmin from "./Home/HomeAdmin";
 import ManageProduct from "./MenageProduct/MenageProduct";
@@ -61,6 +62,7 @@ class App extends Component {
               <Route path="/confirm" component={Confirm} />
               <Route path="/order" component={Order} />
               <Route path="/search" component={Search} />
+              <Route path="/waiting" component={WaitingList} />
             </div>
             <Footer />
           </div>

@@ -6,8 +6,17 @@ import Modal from "./ModalCart";
 class HeaderUsers extends Component {
   componentDidMount() {
     this.props.actionCart(this.props.userId);
+    this.props.getWait(this.props.userId);
     // console.log("component did mount header user");
   }
+
+  notifDisplay = () => {
+    if (this.props.notif) {
+      return <span class="badge badge-light">{this.props.notif}</span>;
+    } else {
+      return null;
+    }
+  };
 
   render() {
     return (
@@ -66,6 +75,7 @@ class HeaderUsers extends Component {
                     aria-expanded="false"
                   >
                     {this.props.userName}
+                    {this.notifDisplay()}
                   </a>
                   {/* user form */}
                   <div className="dropdown-menu dropdown-menu-right">
@@ -74,6 +84,10 @@ class HeaderUsers extends Component {
                     </Link>
                     <Link to="/order" className="dropdown-item">
                       Order
+                    </Link>
+                    <Link to="/waiting" className="dropdown-item">
+                      My List
+                      {this.notifDisplay()}
                     </Link>
                     <div className="dropdown-divider" />
                     <div className="d-flex flex-row">
