@@ -33,6 +33,10 @@ class WaitingList extends Component {
     }
   };
 
+  RemoveList = id => {
+    this.props.delWaitingAction(id, this.props.userId);
+  };
+
   waitingList = () => {
     return this.props.waitData.map(it => {
       if (it.stockDisplay) {
@@ -61,6 +65,14 @@ class WaitingList extends Component {
             <h2 className="text">
               <strong>Not Ready</strong>
             </h2>
+            <button
+              className="btn btn-dark btnwait"
+              onClick={() => {
+                this.RemoveList(it.id);
+              }}
+            >
+              <strong>Remove</strong>
+            </button>
           </div>
         );
       }

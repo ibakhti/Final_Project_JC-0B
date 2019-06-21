@@ -11,6 +11,23 @@ class Modal extends Component {
   //   };
   // }
 
+  removeButton = (userId, productId, sku) => {
+    if (window.location.pathname !== "/checkout") {
+      return (
+        <button
+          className="btn btn-dark"
+          onClick={() => {
+            this.props.remove(userId, productId, sku);
+          }}
+        >
+          remove
+        </button>
+      );
+    } else {
+      return null;
+    }
+  };
+
   cartDisplayMap = () => {
     if (this.props.dataCart.length) {
       return this.props.dataCart.map((data, i) => {
@@ -28,14 +45,7 @@ class Modal extends Component {
               <p className="px-0 mb-0">{data.unitPrice}</p>
               <p className="px-0 mb-0">{`size: ${data.size}`}</p>
               <p className="px-0 mt-0">{`quantity: ${data.quantity}`}</p>
-              <button
-                className="btn btn-dark"
-                onClick={() => {
-                  this.props.remove(data.userId, data.productId, data.sku);
-                }}
-              >
-                remove
-              </button>
+              {this.removeButton(data.userId, data.productId, data.sku)}
             </div>
           </div>
         );

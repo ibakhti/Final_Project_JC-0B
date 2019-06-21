@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/Checkout/checkout.css";
 class ItemList extends Component {
@@ -28,8 +29,13 @@ class ItemList extends Component {
   render() {
     return (
       <div>
-        <div className="row my-5 mx-3">
+        <div className="row my-5 mx-3 justify-content-between">
           <strong>Checkout</strong>
+          <Link to="/cart" className="linkB">
+            <strong>
+              <u>Edit Cart</u>
+            </strong>
+          </Link>
         </div>
         {this.itemListDisplay()}
         <div className="row justify-content-end ml-5 my-3">
