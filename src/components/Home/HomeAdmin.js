@@ -18,7 +18,7 @@ class HomeAdmin extends Component {
           </div>
           <div className="col-md pl-0 iconList">
             <div>
-              <i class="fas fa-clipboard-list" />
+              <i className="fas fa-clipboard-list" />
               <Link to="/order" className="blc">
                 <p id="order">Orders</p>
               </Link>

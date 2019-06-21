@@ -33,3 +33,5 @@ export {
   confirmTotalAction,
   orderIdAction
 } from "./confirmAction";
+
+export { orderCountAction } from "./adminAction";

@@ -238,21 +238,31 @@ class Search extends Component {
 
   productsDisplayMap = () => {
     // console.log(this.state.products);
-    return this.state.data.map(product => {
+    if (this.state.data.length === 0) {
       return (
-        <div className="col-md-4 px-1" key={product.sku}>
-          <Link to={"/productdetail/" + product.sku}>
-            <img
-              src={`http://localhost:8080/picture/${product.img}`}
-              alt="shoes men"
-              className="imgClass"
-            />
-          </Link>
-          <p className="mb-0">{product.productName}</p>
-          <p>{product.unitPrice}</p>
+        <div className="col-md py-5 mb-5 d-flex justify-content-center">
+          <h1 className="display-4">
+            Please Press Button And Type Your Keyword
+          </h1>
         </div>
       );
-    });
+    } else {
+      return this.state.data.map(product => {
+        return (
+          <div className="col-md-4 px-1" key={product.sku}>
+            <Link to={"/productdetail/" + product.sku}>
+              <img
+                src={`http://localhost:8080/picture/${product.img}`}
+                alt="shoes men"
+                className="imgClass"
+              />
+            </Link>
+            <p className="mb-0">{product.productName}</p>
+            <p>{product.unitPrice}</p>
+          </div>
+        );
+      });
+    }
   };
 
   render() {

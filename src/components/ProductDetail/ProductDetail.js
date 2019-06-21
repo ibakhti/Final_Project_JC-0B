@@ -94,6 +94,27 @@ class ProductDetail extends Component {
     // console.log({ productId, sku, size });
   };
 
+  buttonAddToCart = () => {
+    if (this.props.userId) {
+      return (
+        <button
+          className="btn btn-dark btncustome"
+          onClick={this.clickAddToCart}
+        >
+          <strong>Add To Cart</strong>
+        </button>
+      );
+    } else {
+      return (
+        <div>
+          <p className="display-6">
+            <strong>Please Login To Buy This Product</strong>
+          </p>
+        </div>
+      );
+    }
+  };
+
   componentDidMount() {
     this.props.getProductDetailAction(this.props.match.params.sku);
   }
@@ -135,29 +156,58 @@ class ProductDetail extends Component {
                       </select>
                     </div>
                   </form>
-                  <button
-                    className="btn btn-dark btncustome"
-                    onClick={this.clickAddToCart}
-                  >
-                    <strong>Add To Cart</strong>
-                  </button>
+                  {this.buttonAddToCart()}
                   {this.emptyStockNotif()}
                   <ul className="ulcustom">
-                    <li>
-                      <i className="fa fa-check" aria-hidden="true" />
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+                    <li className="pb-0 mb-0">
+                      <div className="row">
+                        <div className="col-sm-1">
+                          <span>
+                            <i className="fa fa-check" aria-hidden="true" />
+                          </span>
+                        </div>
+                        <div className="col-sm">
+                          <p>Order before June to receive discount.</p>
+                        </div>
+                      </div>
                     </li>
-                    <li>
-                      <i className="fa fa-check" aria-hidden="true" />
-                      Lorem ipsum dolor sit amet, consectetur adipiscing.
+                    <li className="py-0 my-0">
+                      <div className="row">
+                        <div className="col-sm-1">
+                          <span>
+                            <i className="fa fa-check" aria-hidden="true" />
+                          </span>
+                        </div>
+                        <div className="col-sm">
+                          <p>Pay with any bank.</p>
+                        </div>
+                      </div>
                     </li>
-                    <li>
-                      <i className="fa fa-check" aria-hidden="true" />
-                      Lorem ipsum dolor sit amet, consectetur adipiscing.
+                    <li className="py-0 my-0">
+                      <div className="row">
+                        <div className="col-sm-1">
+                          <span>
+                            <i className="fa fa-check" aria-hidden="true" />
+                          </span>
+                        </div>
+                        <div className="col-sm">
+                          <p>World wide shipping</p>
+                        </div>
+                      </div>
                     </li>
-                    <li>
-                      <i className="fa fa-check" aria-hidden="true" />
-                      Lorem ipsum dolor sit amet, consectetur adipiscing.
+                    <li className="py-0 my-0">
+                      <div className="row">
+                        <div className="col-sm-1">
+                          <span>
+                            <i className="fa fa-check" aria-hidden="true" />
+                          </span>
+                        </div>
+                        <div className="col-sm">
+                          <p>
+                            When product not ready you can put it at your list.
+                          </p>
+                        </div>
+                      </div>
                     </li>
                   </ul>
                 </div>

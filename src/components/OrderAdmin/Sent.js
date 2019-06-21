@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+
+import { orderCountAction } from "./../../actions/index";
 
 import AddressUser from "./../OrderAdmin/AddressUser";
 import SentDetail from "./../OrderAdmin/SentDetail";
@@ -33,6 +36,7 @@ class Sent extends Component {
       });
       // console.log(res.data.affectedRows);
       if (res.data.affectedRows) {
+        this.props.orderCountAction();
         this.setState({ flag: true });
         return res;
       }
@@ -90,4 +94,7 @@ class Sent extends Component {
   }
 }
 
-export default Sent;
+export default connect(
+  null,
+  { orderCountAction }
+)(Sent);

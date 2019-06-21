@@ -1,7 +1,15 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import { Link } from "react-router-dom";
 
+import { orderCountAction } from "./../../actions/index";
+
 class HeaderAdmin extends Component {
+  componentDidMount() {
+    this.props.orderCountAction();
+  }
+
   render() {
     return (
       <div className="container-fluid mb-5">
@@ -27,6 +35,7 @@ class HeaderAdmin extends Component {
                     aria-expanded="false"
                   >
                     {this.props.userName}
+                    <span class="badge badge-light">{this.props.numOrder}</span>
                   </a>
                   {/* user form */}
                   <div className="dropdown-menu dropdown-menu-right">
@@ -35,6 +44,9 @@ class HeaderAdmin extends Component {
                     </Link>
                     <Link to="/order" className="dropdown-item">
                       Order
+                      <span class="badge badge-light">
+                        {this.props.numOrder}
+                      </span>
                     </Link>
                     <div className="dropdown-divider" />
                     <div className="d-flex flex-row">
@@ -59,4 +71,13 @@ class HeaderAdmin extends Component {
   }
 }
 
-export default HeaderAdmin;
+const mapStateToProps = state => {
+  return {
+    numOrder: state.admin.order
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { orderCountAction }
+)(HeaderAdmin);

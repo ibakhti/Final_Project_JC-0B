@@ -30,6 +30,7 @@ import OrderDetail from "./OrderAdmin/OrderDetail";
 import UserProfile from "./OrderAdmin/UserProfile";
 import Sent from "./OrderAdmin/Sent";
 import Completed from "./OrderAdmin/Completed";
+import Shipping from "./Shipping/Shipping";
 
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/App.css";
 
@@ -43,6 +44,15 @@ class App extends Component {
 
     if (userId) this.props.actionKeepLogin(userId);
   }
+
+  filter = route => {
+    if (this.props.userId) {
+      return route;
+    } else {
+      return Home;
+    }
+  };
+
   render() {
     if (!this.props.isAdmin) {
       return (
@@ -55,16 +65,19 @@ class App extends Component {
               <Route path="/menproducts" component={MenProducts} />
               <Route path="/womenproducts" component={WomenProducts} />
               <Route path="/productdetail/:sku" component={ProductDetail} />
-              <Route path="/myaccount" component={MyAccount} />
-              <Route path="/mypassword" component={MyPassword} />
-              <Route path="/myregaddress" component={MyRegAddress} />
-              <Route path="/checkout" component={Checkout} />
-              <Route path="/editaddress" component={EditAddress} />
-              <Route path="/confirm" component={Confirm} />
-              <Route path="/order" component={Order} />
-              <Route path="/search" component={Search} />
-              <Route path="/waiting" component={WaitingList} />
-              <Route path="/cart" component={Cart} />
+              <Route path="/myaccount" component={this.filter(MyAccount)} />
+              <Route path="/mypassword" component={this.filter(MyPassword)} />
+              <Route
+                path="/myregaddress"
+                component={this.filter(MyRegAddress)}
+              />
+              <Route path="/checkout" component={this.filter(Checkout)} />
+              <Route path="/editaddress" component={this.filter(EditAddress)} />
+              <Route path="/confirm" component={this.filter(Confirm)} />
+              <Route path="/order" component={this.filter(Order)} />
+              <Route path="/search" component={this.filter(Search)} />
+              <Route path="/waiting" component={this.filter(WaitingList)} />
+              <Route path="/cart" component={this.filter(Cart)} />
             </div>
             <Footer />
           </div>
@@ -84,7 +97,7 @@ class App extends Component {
             <Route path="/userProfile/:userId" component={UserProfile} />
             <Route path="/sent/:orderId/:userId" component={Sent} />
             <Route path="/completed" component={Completed} />
-            <Footer />
+            <Route path="/shipping" component={Shipping} />
           </div>
         </BrowserRouter>
       );
@@ -94,7 +107,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAdmin: state.account.isAdmin
+    isAdmin: state.account.isAdmin,
+    userId: state.account.id
   };
 };
 export default connect(
