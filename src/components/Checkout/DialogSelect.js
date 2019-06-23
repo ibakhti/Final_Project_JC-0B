@@ -30,7 +30,7 @@ function DialogSelect(props) {
     duration: props.duration
   });
 
-  const handleChange = (name, c) => event => {
+  const handleChange = name => event => {
     // console.log(event.target);
     setState({ ...state, [name]: event.target.value });
   };
@@ -99,7 +99,7 @@ function DialogSelect(props) {
         <strong>Select Your Shipping Method</strong>
       </Button>
       <Dialog disableEscapeKeyDown open={state.open} onClose={handleClose}>
-        <DialogTitle>Fill the form</DialogTitle>
+        <DialogTitle>Choose Your Shipper And Duration</DialogTitle>
         <DialogContent>
           <form className={classes.container}>
             <FormControl className={classes.formControl}>
@@ -107,7 +107,7 @@ function DialogSelect(props) {
               <Select
                 value={state.shipper}
                 onChange={handleChange("shipper")}
-                input={<Input id="shipper-simple" />}
+                // input={<Input id="shipper-simple" />}
               >
                 {displayShippers()}
               </Select>

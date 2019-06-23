@@ -37,6 +37,18 @@ class WaitingList extends Component {
     this.props.delWaitingAction(id, this.props.userId);
   };
 
+  display = () => {
+    if (this.props.waitData.length !== 0) {
+      return this.waitingList();
+    } else {
+      return (
+        <div className="col-md py-5 mb-5 d-flex justify-content-center">
+          <h1 className="display-4">Your Wait List Is Empty</h1>
+        </div>
+      );
+    }
+  };
+
   waitingList = () => {
     return this.props.waitData.map(it => {
       if (it.stockDisplay) {
@@ -88,7 +100,7 @@ class WaitingList extends Component {
         <div className="row pt-5 pb-3">
           <strong>Your List</strong>
         </div>
-        <div className="row">{this.waitingList()}</div>
+        <div className="row">{this.display()}</div>
       </div>
     );
   }

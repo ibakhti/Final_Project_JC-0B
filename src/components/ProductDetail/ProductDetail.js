@@ -89,9 +89,10 @@ class ProductDetail extends Component {
         });
     } else {
       this.setState({ flag: true, userId: userId, productId: productId });
-      setTimeout(() => {
-        this.setState({ flag: false });
-      }, 7000);
+      console.log({ userId, productId });
+      // setTimeout(() => {
+      //   this.setState({ flag: false });
+      // }, 7000);
     }
     // console.log({ productId, sku, size });
   };

@@ -13,11 +13,13 @@ class Cart extends Component {
       return (
         <div className="row border-bottom border-dark mb-3 pb-3" key={i}>
           <div className="col-md">
-            <img
-              src={`http://localhost:8080/picture/${data.img}`}
-              alt="shoes"
-              className="imgCart"
-            />
+            <Link to={`/productdetail/${data.sku}`}>
+              <img
+                src={`http://localhost:8080/picture/${data.img}`}
+                alt="shoes"
+                className="imgCart"
+              />
+            </Link>
           </div>
           <div className="col-md">
             <p className="px-0 mb-0">{data.productName}</p>
@@ -44,7 +46,12 @@ class Cart extends Component {
           <strong>Edit Cart</strong>
         </div>
         {this.displayData()}
-        <div className="row my-2 justify-content-end">
+        <div className="row my-2 justify-content-between">
+          <div>
+            <p style={{ fontSize: "8" }}>
+              *Click the image to add more product
+            </p>
+          </div>
           <Link to="/checkout" style={{ color: "black" }}>
             <strong>got to Checkout</strong>
           </Link>

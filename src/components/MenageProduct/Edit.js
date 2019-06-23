@@ -334,7 +334,7 @@ class Edit extends Component {
                 </div>
               </form>
               <div className="row justify-content-end">
-                <div className="col-sm-4 py-4">
+                <div className="col-sm-4 py-4 add">
                   <button className="btn btn-dark" onClick={this.editFn}>
                     <strong>Edit</strong>
                   </button>

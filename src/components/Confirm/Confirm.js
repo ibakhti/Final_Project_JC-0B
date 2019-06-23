@@ -54,6 +54,11 @@ class Confirm extends Component {
     }
   };
 
+  handleChange = event => {
+    this.setState({ url: URL.createObjectURL(event.target.files[0]) });
+    console.log(this.state.url);
+  };
+
   render() {
     return (
       <div className="container">
@@ -100,6 +105,7 @@ class Confirm extends Component {
                   ref={input => {
                     this.gambar = input;
                   }}
+                  onChange={this.handleChange}
                 />
               </div>
             </form>

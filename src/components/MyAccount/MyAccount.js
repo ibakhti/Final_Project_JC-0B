@@ -16,7 +16,8 @@ class MyAccount extends Component {
       flagAccount: false,
       flagAddress: false,
       errorA: "",
-      errorB: ""
+      errorB: "",
+      url: ""
     };
   }
 
@@ -94,12 +95,17 @@ class MyAccount extends Component {
 
     if (!firstName || !lastName || !email) {
       this.setState({ errorA: "All Column Must Be Filled" });
-    } else if (
-      !parseInt(firstName) ||
-      !parseInt(lastName) ||
-      !parseInt(email)
-    ) {
+    } else if (parseInt(firstName) || parseInt(lastName) || parseInt(email)) {
       this.setState({ errorA: "FirstName, LastName, Email Must Be a Letter" });
+    } else if (
+      firstName.match(
+        /[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/
+      ) ||
+      lastName.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/)
+    ) {
+      this.setState({
+        errorA: "FirstName, LastName,Must Not Contain Spesial Character"
+      });
     } else {
       axios
         .put(`/users/update/${this.props.userId}`, {
@@ -146,6 +152,11 @@ class MyAccount extends Component {
     }
   };
 
+  handleChange = event => {
+    this.setState({ url: URL.createObjectURL(event.target.files[0]) });
+    console.log(this.state.url);
+  };
+
   componentDidMount() {
     axios.get(`/users/address?userId=${this.props.userId}`).then(res => {
       if (res.status === 200) {
@@ -170,7 +181,7 @@ class MyAccount extends Component {
               src={
                 this.props.avatar
                   ? `http://localhost:8080/user/avatar/${this.props.avatar}`
-                  : ""
+                  : this.state.url
               }
               className="aImg mb-3 pb-3"
             />
@@ -183,6 +194,7 @@ class MyAccount extends Component {
                   ref={input => {
                     this.gambar = input;
                   }}
+                  onChange={this.handleChange}
                 />
               </div>
             </form>

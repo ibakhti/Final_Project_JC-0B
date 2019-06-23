@@ -8,20 +8,20 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flag: false
+      message: ""
     };
   }
 
   errorMessageDisplay = () => {
-    if (this.state.flag) {
+    if (this.state.message) {
       setTimeout(() => {
-        this.setState({ flag: false });
+        this.setState({ message: "" });
       }, 3000);
 
       return (
         <div className="col">
           <div className="alert alert-danger text-center">
-            Password Don't Match
+            {this.state.message}
           </div>
         </div>
       );
@@ -55,16 +55,44 @@ class Register extends Component {
       gender = this.refs.gender.checked ? "men" : "women",
       password = this.refs.password.value,
       repeatPassword = this.refs.repeatPassword.value;
+    if (
+      userName === "" ||
+      firstName === "" ||
+      lastName === "" ||
+      email === ""
+    ) {
+      this.setState({ message: "Please Fill All Column" });
+    } else if (
+      parseInt(userName) ||
+      parseInt(firstName) ||
+      parseInt(lastName)
+    ) {
+      this.setState({
+        message: "Username, FirstName, or Lastname Must Be Latter"
+      });
+    } else if (
+      firstName.match(
+        /[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/
+      ) ||
+      lastName.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/)
+    ) {
+      this.setState({
+        message: "First name. Last Name Must Not Contain Any Special Character"
+      });
+    } else if (password !== repeatPassword) {
+      this.setState({ message: "password doesn't match" });
+    } else {
+      this.props.actionRegister(
+        userName,
+        firstName,
+        lastName,
+        email,
+        gender,
+        password
+      );
+      this.setState({ message: "oke" });
+    }
 
-    if (password !== repeatPassword) return this.setState({ flag: true });
-    this.props.actionRegister(
-      userName,
-      firstName,
-      lastName,
-      email,
-      gender,
-      password
-    );
     // console.log({ userName, firstName, lastName, email, gender, password });
   };
 

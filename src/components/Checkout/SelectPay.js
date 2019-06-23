@@ -13,10 +13,7 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 250
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
+    minWidth: 300
   }
 }));
 
@@ -27,7 +24,7 @@ function SelectPay(props) {
   });
 
   const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
+  const [labelWidth, setLabelWidth] = React.useState(2);
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
@@ -35,7 +32,7 @@ function SelectPay(props) {
   function handleChange(event) {
     setValues(oldValues => ({
       ...oldValues,
-      [event.target.name]: event.target.value
+      transfer: event.target.value
     }));
 
     props.payment(event.target.value);

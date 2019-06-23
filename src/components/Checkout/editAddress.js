@@ -9,7 +9,8 @@ class MyAddress extends Component {
     super(props);
     this.state = {
       data: [],
-      done: false
+      done: false,
+      error: ""
     };
   }
 
@@ -22,19 +23,64 @@ class MyAddress extends Component {
 
     // console.log({ userId, address, city, state, zip, phoneNumber });
 
-    axios
-      .put(`/users/address/update/${this.props.userId}`, {
-        address,
-        city,
-        state,
-        zip,
-        phoneNumber
-      })
-      .then(res => {
-        if (res.data.changedRows) {
-          this.setState({ done: true });
-        }
+    if (
+      address === "" ||
+      city === "" ||
+      state === "" ||
+      zip === "" ||
+      phoneNumber === ""
+    ) {
+      this.setState({ error: "Please Fill All Column" });
+    } else if (parseInt(address) || parseInt(city) || parseInt(state)) {
+      this.setState({ error: "Address, City, or State Must Be Latter" });
+    } else if (!parseInt(phoneNumber)) {
+      this.setState({ error: "Phone Number Must Number" });
+    } else if (
+      address.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/) ||
+      city.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/) ||
+      state.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/) ||
+      zip.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/) ||
+      phoneNumber.match(
+        /[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/
+      )
+    ) {
+      this.setState({
+        error:
+          "Address, City, State, Zip, Phone Number Must Not Contain Any Special Character"
       });
+    } else {
+      axios
+        .put(`/users/address/update/${this.props.userId}`, {
+          address,
+          city,
+          state,
+          zip,
+          phoneNumber
+        })
+        .then(res => {
+          if (res.data.changedRows) {
+            this.setState({ done: true });
+          }
+        });
+    }
+  };
+
+  errorMessegeDisplay = () => {
+    if (this.state.error) {
+      setTimeout(() => {
+        this.setState({ error: "" });
+      }, 5000);
+
+      return (
+        <div className="col">
+          <div className="alert alert-danger text-center">
+            {this.state.error}
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
   };
 
   componentDidMount() {
@@ -124,6 +170,7 @@ class MyAddress extends Component {
               </button>
             </div>
           </div>
+          {this.errorMessegeDisplay()}
         </div>
       );
     } else {
