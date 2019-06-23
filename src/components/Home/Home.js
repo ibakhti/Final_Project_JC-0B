@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "./../../config/axios";
+import LazyLoad from "react-lazy-load";
 
+import ImageLoader from "./../../playground/ImageLoader";
 import Carousel from "./Carousel";
 import "./home.css";
 
@@ -15,12 +17,9 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    axios.get("/product/new").then(res => {
-      this.setState({
-        data: res.data
-      });
+    axios.get("/product/new").then(res1 => {
       axios.get("/product/popular").then(res => {
-        this.setState({ popul: res.data });
+        this.setState({ data: res1.data, popul: res.data });
       });
     });
   }
@@ -29,13 +28,15 @@ class Home extends Component {
     return this.state.data.map((it, i) => {
       return (
         <div className="col-md-4" key={i}>
-          <Link to={"/productdetail/" + it.sku}>
-            <img
-              src={`http://localhost:8080/picture/${it.img}`}
-              alt="shoes"
-              className="img-thumbnail"
-            />
-          </Link>
+          <LazyLoad debounce={false} offsetVertical={0}>
+            <Link to={"/productdetail/" + it.sku}>
+              <ImageLoader
+                src={`http://localhost:8080/picture/${it.img}`}
+                alt="shoes"
+                className="img-thumbnail"
+              />
+            </Link>
+          </LazyLoad>
           <p className="mb-0">{it.productName}</p>
           <p>{it.unitPrice}</p>
         </div>
@@ -48,11 +49,13 @@ class Home extends Component {
       return (
         <div className="col-md" key={i}>
           <Link to={"/productdetail/" + it.sku}>
-            <img
-              src={`http://localhost:8080/picture/${it.img}`}
-              alt="shoes"
-              className="img-thumbnail"
-            />
+            <LazyLoad>
+              <ImageLoader
+                src={`http://localhost:8080/picture/${it.img}`}
+                alt="shoes"
+                className="img-thumbnail"
+              />
+            </LazyLoad>
           </Link>
         </div>
       );

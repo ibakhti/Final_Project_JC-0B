@@ -30,7 +30,6 @@ import OrderDetail from "./OrderAdmin/OrderDetail";
 import UserProfile from "./OrderAdmin/UserProfile";
 import Sent from "./OrderAdmin/Sent";
 import Completed from "./OrderAdmin/Completed";
-import Shipping from "./Shipping/Shipping";
 
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/App.css";
 
@@ -97,7 +96,6 @@ class App extends Component {
             <Route path="/userProfile/:userId" component={UserProfile} />
             <Route path="/sent/:orderId/:userId" component={Sent} />
             <Route path="/completed" component={Completed} />
-            <Route path="/shipping" component={Shipping} />
           </div>
         </BrowserRouter>
       );

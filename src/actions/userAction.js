@@ -66,9 +66,14 @@ export const actionRegister = (
       })
       .then(res => {
         if (typeof res.data === typeof "") {
+          const mssg = res.data.match(/email/)
+            ? "Email Has Been Taken"
+            : res.data.match(/userName/)
+            ? "Username Has Been Taken"
+            : res.data;
           dispatch({
             type: "REGISTER_ERROR",
-            messege: res.data
+            messege: mssg
           });
         } else {
           axios
@@ -103,3 +108,14 @@ export const userAvatarAction = img => ({
   type: "AVATAR_TAKE",
   data: img
 });
+
+export const actionRegisterAddress = (
+  address,
+  city,
+  state,
+  zip,
+  phoneNumber,
+  userId
+) => {
+  return dispatch => {};
+};

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import LazyLoad from "react-lazy-load";
 
 import CheckBox from "./CheckBox";
+import ImageLoader from "./../../playground/ImageLoader";
 
 import {
   actionCartGetData,
@@ -125,23 +127,28 @@ class ProductDetail extends Component {
         <div className="container-fluid">
           <div className="row pt-5">
             <div className="col-md">
-              <img
-                src={this.props.items.url1}
-                alt="shoes"
-                className="img-thumbnail my-5 images"
-              />
-              <img
-                src={this.props.items.url2}
-                alt="shoes"
-                className="img-thumbnail my-5 images moveout"
-              />
-              <img
-                src={this.props.items.url3}
-                alt="shoes"
-                className="img-thumbnail my-5 images moveout70"
-              />
+              <LazyLoad offsetVertical={0}>
+                <ImageLoader
+                  src={this.props.items.url1}
+                  alt="shoes"
+                  className="img-thumbnail my-5 images"
+                />
+              </LazyLoad>
+              <LazyLoad offsetVertical={0}>
+                <ImageLoader
+                  src={this.props.items.url2}
+                  alt="shoes"
+                  className="img-thumbnail my-5 images moveout"
+                />
+              </LazyLoad>
+              <LazyLoad offsetVertical={0}>
+                <ImageLoader
+                  src={this.props.items.url3}
+                  alt="shoes"
+                  className="img-thumbnail my-5 images moveout70"
+                />
+              </LazyLoad>
             </div>
-
             <div className="col-md">
               <div className="row justify-content-center pt-5">
                 <div className="col-md-7">

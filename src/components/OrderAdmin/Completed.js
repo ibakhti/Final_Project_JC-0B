@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import axios from "../../config/axios";
 
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/OrderAdmin/ordeAdmin.css";
+import SnackBar from "./../MenageProduct/SnackBar";
 
 class OrderAdmin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
+      open: false,
+      message: ""
     };
   }
 
@@ -16,6 +19,23 @@ class OrderAdmin extends Component {
     axios.get("/admin/order/fulfill").then(res => {
       this.setState({ data: res.data });
     });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  sendInvoice = (orderId, userId) => {
+    axios
+      .put("/invoice", {
+        orderId,
+        userId
+      })
+      .then(res => {
+        if (res.data) {
+          this.setState({ message: "Invoice Send", open: true });
+        }
+      });
   };
 
   orderDisplay = () => {
@@ -45,6 +65,16 @@ class OrderAdmin extends Component {
             >
               transfer Img
             </a>
+          </td>
+          <td>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                this.sendInvoice(it.orderId, it.userId);
+              }}
+            >
+              Send Invoice
+            </button>
           </td>
         </tr>
       );
@@ -78,11 +108,17 @@ class OrderAdmin extends Component {
                 <th scope="col">Rek num</th>
                 <th scope="col">Payment Date</th>
                 <th scope="col">Transfer Slip</th>
+                <th scope="col">Invoice</th>
               </tr>
             </thead>
             <tbody>{this.orderDisplay()}</tbody>
           </table>
         </div>
+        <SnackBar
+          open={this.state.open}
+          handleClose={this.handleClose}
+          message={this.state.message}
+        />
       </div>
     );
   }

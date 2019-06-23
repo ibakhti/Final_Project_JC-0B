@@ -35,7 +35,9 @@ class HeaderAdmin extends Component {
                     aria-expanded="false"
                   >
                     {this.props.userName}
-                    <span class="badge badge-light">{this.props.numOrder}</span>
+                    <span className="badge badge-light">
+                      {this.props.numOrder}
+                    </span>
                   </a>
                   {/* user form */}
                   <div className="dropdown-menu dropdown-menu-right">
@@ -44,7 +46,7 @@ class HeaderAdmin extends Component {
                     </Link>
                     <Link to="/order" className="dropdown-item">
                       Order
-                      <span class="badge badge-light">
+                      <span className="badge badge-light">
                         {this.props.numOrder}
                       </span>
                     </Link>

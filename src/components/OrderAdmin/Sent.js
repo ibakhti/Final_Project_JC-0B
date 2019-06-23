@@ -16,12 +16,12 @@ class Sent extends Component {
     };
   }
 
-  SendProduct = orderId => {
-    this.stockAndFulfill(orderId, 0);
+  SendProduct = (orderId, email) => {
+    this.stockAndFulfill(orderId, email, 0);
     // console.log(this.state.data);
   };
 
-  stockAndFulfill = async (orderId, i) => {
+  stockAndFulfill = async (orderId, email, i) => {
     // console.log([i, this.state.data.length]);
     if (i < this.state.data.length) {
       const res = await axios.put("/order/delete", {
@@ -45,7 +45,7 @@ class Sent extends Component {
 
   redirectToOrder = () => {
     if (this.state.flag) {
-      return <Redirect to="/order" />;
+      return <Redirect to="/completed" />;
     } else {
       return null;
     }
@@ -82,10 +82,13 @@ class Sent extends Component {
           <button
             className="btn btn-primary btnfit"
             onClick={() => {
-              this.SendProduct(this.props.match.params.orderId);
+              this.SendProduct(
+                this.props.match.params.orderId,
+                this.props.email
+              );
             }}
           >
-            <strong>Send</strong>
+            <strong>Send Product</strong>
           </button>
         </div>
         {this.redirectToOrder()}

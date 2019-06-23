@@ -14,7 +14,9 @@ class MyAccount extends Component {
     this.state = {
       data: [],
       flagAccount: false,
-      flagAddress: false
+      flagAddress: false,
+      errorA: "",
+      errorB: ""
     };
   }
 
@@ -48,25 +50,75 @@ class MyAccount extends Component {
     }
   };
 
+  errorAccountMessegeDisplay = () => {
+    if (this.state.errorA) {
+      setTimeout(() => {
+        this.setState({ errorA: "" });
+      }, 5000);
+
+      return (
+        <div className="col">
+          <div className="alert alert-danger text-center">
+            {this.state.errorA}
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
+
+  errorAddressMessegeDisplay = () => {
+    if (this.state.errorB) {
+      setTimeout(() => {
+        this.setState({ errorB: "" });
+      }, 5000);
+
+      return (
+        <div className="col">
+          <div className="alert alert-danger text-center">
+            {this.state.errorB}
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
+
   submitUpdateData = () => {
     const firstName = this.refs.firstName.value,
       lastName = this.refs.lastName.value,
       email = this.refs.email.value,
       gender = this.refs.gender.checked ? "men" : "women";
 
-    axios
-      .put(`/users/update/${this.props.userId}`, {
-        firstName,
-        lastName,
-        email,
-        gender
-      })
-      .then(res => {
-        if (res.data.changedRows) {
-          this.props.actionKeepLogin(this.props.userId);
-          this.setState({ flagAccount: true });
-        }
-      });
+    if (!firstName || !lastName || !email) {
+      this.setState({ errorA: "All Column Must Be Filled" });
+    } else if (
+      !parseInt(firstName) ||
+      !parseInt(lastName) ||
+      !parseInt(email)
+    ) {
+      this.setState({ errorA: "FirstName, LastName, Email Must Be a Letter" });
+    } else {
+      axios
+        .put(`/users/update/${this.props.userId}`, {
+          firstName,
+          lastName,
+          email,
+          gender
+        })
+        .then(res => {
+          if (res.data.changedRows) {
+            this.props.actionKeepLogin(this.props.userId);
+            this.setState({ flagAccount: true });
+          }
+        });
+    }
+  };
+
+  handleError = m => {
+    this.setState({ errorB: m });
   };
 
   setFlagAddresstoTrue = () => {
@@ -115,7 +167,11 @@ class MyAccount extends Component {
             </p>
             <img
               alt="Your Avatar"
-              src={`http://localhost:8080/user/avatar/${this.props.avatar}`}
+              src={
+                this.props.avatar
+                  ? `http://localhost:8080/user/avatar/${this.props.avatar}`
+                  : ""
+              }
               className="aImg mb-3 pb-3"
             />
             <form>
@@ -226,7 +282,10 @@ class MyAccount extends Component {
         </div>
 
         <div className="row mt-3">
-          <div className="col">{this.successMeessageDisplay()}</div>
+          <div className="col-sm offset-sm-3">
+            {this.successMeessageDisplay()}
+            {this.errorAccountMessegeDisplay()}
+          </div>
         </div>
 
         <div className="row mt-5 pt-5">
@@ -240,10 +299,14 @@ class MyAccount extends Component {
           userId={this.props.userId}
           user={this.state.data}
           fnSuccess={this.setFlagAddresstoTrue}
+          error={this.handleError}
         />
 
         <div className="row mt-3">
-          <div className="col offset-md-3">{this.successMeessageDisplay()}</div>
+          <div className="col offset-md-3">
+            {this.successMeessageDisplay()}
+            {this.errorAddressMessegeDisplay()}
+          </div>
         </div>
       </div>
     );

@@ -12,19 +12,45 @@ class MyAddress extends Component {
 
     // console.log({ userId, address, city, state, zip, phoneNumber });
 
-    axios
-      .put(`/users/address/update/${this.props.userId}`, {
-        address,
-        city,
-        state,
-        zip,
-        phoneNumber
-      })
-      .then(res => {
-        if (res.data.changedRows) {
-          this.props.fnSuccess();
-        }
-      });
+    if (
+      address === "" ||
+      city === "" ||
+      state === "" ||
+      zip === "" ||
+      phoneNumber === ""
+    ) {
+      this.props.error("Please Fill All Column");
+    } else if (parseInt(address) || parseInt(city) || parseInt(state)) {
+      this.props.error("Address, City, or State Must Be Latter");
+    } else if (!parseInt(phoneNumber)) {
+      this.props.error("Phone Number Must Number");
+    } else if (
+      address.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/) ||
+      city.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/) ||
+      state.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/) ||
+      zip.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/) ||
+      phoneNumber.match(
+        /[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/
+      )
+    ) {
+      this.props.error(
+        "Address, City, State, Zip, Phone Number Must Not Contain Any Special Character"
+      );
+    } else {
+      axios
+        .put(`/users/address/update/${this.props.userId}`, {
+          address,
+          city,
+          state,
+          zip,
+          phoneNumber
+        })
+        .then(res => {
+          if (res.data.changedRows) {
+            this.props.fnSuccess();
+          }
+        });
+    }
   };
 
   render() {
