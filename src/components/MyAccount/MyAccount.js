@@ -99,9 +99,9 @@ class MyAccount extends Component {
       this.setState({ errorA: "FirstName, LastName, Email Must Be a Letter" });
     } else if (
       firstName.match(
-        /[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/
+        /[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|\-|^|&|*|(|)|{|}|]/
       ) ||
-      lastName.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/)
+      lastName.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|\-|^|&|*|(|)|{|}|]/)
     ) {
       this.setState({
         errorA: "FirstName, LastName,Must Not Contain Spesial Character"

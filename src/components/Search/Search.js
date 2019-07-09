@@ -220,8 +220,8 @@ class Search extends Component {
         this.refs.category.value = "";
       });
     } else if (n === "price") {
-      const min = parseInt(this.refs.min.value);
-      const max = parseInt(this.refs.max.value);
+      const min = this.refs.min.value ? parseInt(this.refs.min.value) : 0;
+      const max = this.refs.max.value ? parseInt(this.refs.max.value) : 0;
       axios.get(`/search/price?min=${min}&&max=${max}`).then(res => {
         this.setState({ data: res.data });
         this.refs.min.value = "";

@@ -72,9 +72,11 @@ class Register extends Component {
       });
     } else if (
       firstName.match(
-        /[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/
+        /[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|\-|_|=|^|&|*|(|)|{|}|]/
       ) ||
-      lastName.match(/[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|-|^|&|*|(|)|{|}|]/)
+      lastName.match(
+        /[[|\]|`|~|\\|||*|$|%|#|@|?|>|<|/|!|+|\-|_|=|^|&|*|(|)|{|}|]/
+      )
     ) {
       this.setState({
         message: "First name. Last Name Must Not Contain Any Special Character"
