@@ -30,7 +30,7 @@ class Confirm extends Component {
       this.setState({ url: res.data.url, flag: true });
       setInterval(() => {
         window.location.pathname = "/";
-      }, 7000);
+      }, 5000);
     } catch (error) {
       console.log("uploadError" + error);
     }

@@ -90,7 +90,7 @@ class Register extends Component {
         gender,
         password
       );
-      this.setState({ message: "oke" });
+      // this.setState({ message: "oke" });
     }
 
     // console.log({ userName, firstName, lastName, email, gender, password });

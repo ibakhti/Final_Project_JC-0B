@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "../../config/axios";
 import DialogDeny from "./DialogDeny";
+
+import { orderCountAction } from "./../../actions/index";
 
 import "/home/ilham/Documents/Purwadhika/Final_project/Final_Project_JC-0B/src/components/OrderAdmin/ordeAdmin.css";
 
@@ -11,7 +14,8 @@ class OrderAdmin extends Component {
     this.state = {
       data: [],
       orderId: "",
-      open: false
+      open: false,
+      remove: false
     };
   }
 
@@ -22,16 +26,28 @@ class OrderAdmin extends Component {
   };
 
   deny = () => {
-    axios
-      .delete(`/admin/deny`, { data: { orderId: this.state.orderId } })
-      .then(res => {
-        this.getdata();
-        this.setState({ open: false });
-      });
+    if (this.state.remove) {
+      axios
+        .delete(`/admin/order/delete`, {
+          data: { orderId: this.state.orderId }
+        })
+        .then(res => {
+          this.getdata();
+          this.props.orderCountAction();
+          this.setState({ open: false });
+        });
+    } else {
+      axios
+        .delete(`/admin/deny`, { data: { orderId: this.state.orderId } })
+        .then(res => {
+          this.getdata();
+          this.setState({ open: false });
+        });
+    }
   };
 
-  openDialog = oid => {
-    this.setState({ open: true, orderId: oid });
+  openDialog = (oid, remove) => {
+    this.setState({ open: true, orderId: oid, remove: remove });
   };
 
   orderDisplay = () => {
@@ -80,9 +96,9 @@ class OrderAdmin extends Component {
             Accept
           </Link>
           <button
-            className="btn btn-danger ml-1"
+            className="btn btn-warning ml-1"
             onClick={() => {
-              this.openDialog(o);
+              this.openDialog(o, false);
             }}
           >
             Deny
@@ -90,7 +106,18 @@ class OrderAdmin extends Component {
         </div>
       );
     } else {
-      return null;
+      return (
+        <div>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              this.openDialog(o, true);
+            }}
+          >
+            Remove
+          </button>
+        </div>
+      );
     }
   };
 
@@ -144,4 +171,7 @@ class OrderAdmin extends Component {
   }
 }
 
-export default OrderAdmin;
+export default connect(
+  null,
+  { orderCountAction }
+)(OrderAdmin);

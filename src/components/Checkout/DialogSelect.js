@@ -5,11 +5,11 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-import MenuItem from "@material-ui/core/MenuItem";
+// import InputLabel from "@material-ui/core/InputLabel";
+// import Input from "@material-ui/core/Input";
+// import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+// import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -31,7 +31,7 @@ function DialogSelect(props) {
   });
 
   const handleChange = name => event => {
-    // console.log(event.target);
+    // console.log(event.target.value);
     setState({ ...state, [name]: event.target.value });
   };
 
@@ -45,15 +45,19 @@ function DialogSelect(props) {
 
   function handleOke() {
     setState({ ...state, open: false });
+    // console.log([state.shipper, state.duration]);
     props.giveShippingData(state.shipper, state.duration);
   }
 
   const displayShippers = () => {
     return props.dataShippers.map(item => {
       return (
-        <MenuItem key={item.shippingId} value={item.shippingName}>
+        // <MenuItem key={item.shippingId} value={item.shippingName}>
+        //   {item.shippingName}
+        // </MenuItem>
+        <option key={item.shippingId} value={item.shippingName}>
           {item.shippingName}
-        </MenuItem>
+        </option>
       );
     });
   };
@@ -64,12 +68,15 @@ function DialogSelect(props) {
     });
     return dsh.map(item => {
       return (
-        <MenuItem
-          key={item.id}
-          value={`${item.duration}, price: ${item.price}`}
-        >
+        // <MenuItem
+        //   key={item.id}
+        //   value={`${item.duration}, price: ${item.price}`}
+        // >
+        //   {`${item.duration} price: ${item.price}`}
+        // </MenuItem>
+        <option key={item.id} value={`${item.duration}, price: ${item.price}`}>
           {`${item.duration} price: ${item.price}`}
-        </MenuItem>
+        </option>
       );
     });
   };
@@ -78,14 +85,23 @@ function DialogSelect(props) {
     if (state.shipper) {
       return (
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="duration-simple">Duration</InputLabel>
-          <Select
+          {/* <InputLabel htmlFor="duration-simple">Duration</InputLabel> */}
+          {/* <Select
             value={state.duration}
             onChange={handleChange("duration")}
             input={<Input id="duration-simple" />}
           >
             {displayDuration()}
-          </Select>
+          </Select> */}
+          <select
+            className="custom-select"
+            id="duration-simple"
+            value={state.duration}
+            onChange={handleChange("duration")}
+          >
+            <option value="">Duration</option>
+            {displayDuration()}
+          </select>
         </FormControl>
       );
     } else {
@@ -98,19 +114,28 @@ function DialogSelect(props) {
       <Button onClick={handleClickOpen}>
         <strong>Select Your Shipping Method</strong>
       </Button>
-      <Dialog disableEscapeKeyDown open={state.open} onClose={handleClose}>
+      <Dialog open={state.open}>
         <DialogTitle>Choose Your Shipper And Duration</DialogTitle>
         <DialogContent>
           <form className={classes.container}>
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="shipper-simple">Shippers</InputLabel>
-              <Select
+              {/* <InputLabel htmlFor="shipper-simple">Shippers</InputLabel> */}
+              {/* <Select
                 value={state.shipper}
                 onChange={handleChange("shipper")}
                 // input={<Input id="shipper-simple" />}
               >
                 {displayShippers()}
-              </Select>
+              </Select> */}
+              <select
+                className="custom-select"
+                id="shipper-simple"
+                value={state.shipper}
+                onChange={handleChange("shipper")}
+              >
+                <option value="">Shipper</option>
+                {displayShippers()}
+              </select>
             </FormControl>
             {formDuration()}
           </form>

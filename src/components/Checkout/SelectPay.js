@@ -1,10 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
+// import OutlinedInput from "@material-ui/core/OutlinedInput";
+// import InputLabel from "@material-ui/core/InputLabel";
+// import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+// import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,11 +23,11 @@ function SelectPay(props) {
     transfer: ""
   });
 
-  const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(2);
-  React.useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth);
-  }, []);
+  // const inputLabel = React.useRef(null);
+  // const [labelWidth, setLabelWidth] = React.useState(2);
+  // React.useEffect(() => {
+  //   setLabelWidth(inputLabel.current.offsetWidth);
+  // }, []);
 
   function handleChange(event) {
     setValues(oldValues => ({
@@ -42,23 +42,28 @@ function SelectPay(props) {
     // console.log(props.paylist);
     return props.paylist.map(item => {
       return (
-        <MenuItem key={item.paymentId} value={item.paymentId}>
-          <img
-            alt="bank name"
-            src={`http://localhost:8080/paypict/${item.paymentImg}`}
-            className="paypict"
-          />
-        </MenuItem>
+        // <MenuItem key={item.paymentId} value={item.paymentId}>
+        //   {/* <img
+        //     alt="bank name"
+        //     src={`http://localhost:8080/paypict/${item.paymentImg}`}
+        //     className="paypict"
+        //   /> */}
+        //   {item.paymentName}
+        // </MenuItem>
+
+        <option key={item.paymentId} value={item.paymentId}>
+          {item.paymentName}
+        </option>
       );
     });
   };
   return (
     <form className={classes.root} autoComplete="off">
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel ref={inputLabel} htmlFor="outlined-trf-simple">
+        {/* <InputLabel ref={inputLabel} htmlFor="outlined-trf-simple">
           <strong>Transfer Bank</strong>
-        </InputLabel>
-        <Select
+        </InputLabel> */}
+        {/* <Select
           value={values.transfer}
           onChange={handleChange}
           // open={true}
@@ -71,7 +76,17 @@ function SelectPay(props) {
           }
         >
           {paylistDisplay()}
-        </Select>
+        </Select> */}
+
+        <select
+          class="custom-select"
+          id="inputGroupSelect01"
+          value={values.transfer}
+          onChange={handleChange}
+        >
+          <option value="">Transfer Bank</option>
+          {paylistDisplay()}
+        </select>
       </FormControl>
     </form>
   );
